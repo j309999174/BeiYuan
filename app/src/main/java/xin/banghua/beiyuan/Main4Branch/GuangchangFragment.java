@@ -1,6 +1,7 @@
 package xin.banghua.beiyuan.Main4Branch;
 
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -274,6 +275,7 @@ public class GuangchangFragment extends Fragment implements BaseSliderView.OnSli
 
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {

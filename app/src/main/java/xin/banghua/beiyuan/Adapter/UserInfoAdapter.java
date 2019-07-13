@@ -81,9 +81,10 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHo
                 Log.d(TAG, "onClick: clicked on: "+mUserID.get(i));
                 Toast.makeText(mContext,mUserID.get(i)+mUserNickName.get(i),Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(v.getContext(), PersonageActivity.class);
+                intent.putExtra("userID",mUserID.get(i));
                 //保存选中的用户id
-                SharedHelper shvalue = new SharedHelper(mContext);
-                shvalue.saveValue(mUserID.get(i));
+                //SharedHelper shvalue = new SharedHelper(mContext);
+                //shvalue.saveValue(mUserID.get(i));
                 Log.d(TAG, "onClick: 保存选中的用户id"+mUserID.get(i));
                 v.getContext().startActivity(intent);
             }

@@ -1,11 +1,13 @@
 常用：
 网络图片:
-Glide.with(mContext)
+*Glide.with(mContext)
      .asBitmap()
      .load(mUserPortrait.get(i))
      .into(viewHolder.userPortrait);
-Fragment直接跳转
+*Fragment直接跳转
 fujin.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.tuijian_fujin_action));
+*Activity跳转另一个activity的fragment
+fragment可直接String result = getActivity().getIntent().getStringExtra("result");取值
 
 1.读写本地数据
 在SharedHelper.java中添加读写方法
@@ -106,3 +108,5 @@ JSONArray jsonArray = new ParseJSONArray(msg.obj.toString()).getParseJSON();
                while(mUserID.hasNext()){
                    System.out.println(mUserID.next());
                }
+
+4.recyclerview

@@ -87,8 +87,11 @@ public class PersonageFragment extends Fragment {
 
         Log.d(TAG, "onViewCreated: 进入person");
         //取出选中的用户id
-        SharedHelper shvalue = new SharedHelper(getActivity().getApplicationContext());
-        mUserID = shvalue.readValue().get("value");
+        //SharedHelper shvalue = new SharedHelper(getActivity().getApplicationContext());
+        //mUserID = shvalue.readValue().get("value");
+
+        String result = getActivity().getIntent().getStringExtra("userID");
+        mUserID = result;
 
         mUserNickName_tv=view.findViewById(R.id.user_nickname);
         mUserPortrait_iv=view.findViewById(R.id.user_portrait);

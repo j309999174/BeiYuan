@@ -1,6 +1,7 @@
 package xin.banghua.beiyuan.Main5Branch;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -79,7 +80,13 @@ public class MeFragment extends Fragment {
 
 
         setting_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.me_setting_action));
-
+        xiangce_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),CircleActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
