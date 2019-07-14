@@ -1,6 +1,7 @@
 package xin.banghua.beiyuan.Main5Branch;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -36,11 +38,16 @@ public class MeFragment extends Fragment {
     Button sawme_btn;
     Button setting_btn;
 
-
+    private Context mContext;
     public MeFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.mContext = getActivity();
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -87,6 +94,31 @@ public class MeFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        sawme_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(),SawMeActivity.class);
+                startActivity(intent);
+            }
+        });
 
+        tuiguangma_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "您的推广码是：5", Toast.LENGTH_LONG).show();
+            }
+        });
+        jifen_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "共拥有500积分", Toast.LENGTH_LONG).show();
+            }
+        });
+        openvip_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, "功能维护中", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

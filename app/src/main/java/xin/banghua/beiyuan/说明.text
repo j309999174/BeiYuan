@@ -8,7 +8,13 @@
 fujin.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.tuijian_fujin_action));
 *Activity跳转另一个activity的fragment
 fragment可直接String result = getActivity().getIntent().getStringExtra("result");取值
-
+*fragment中获取activity
+private Context mContext;
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.mContext = getActivity();
+    }
 1.读写本地数据
 在SharedHelper.java中添加读写方法
 写入：

@@ -1,5 +1,6 @@
 package xin.banghua.beiyuan.Signin;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,13 +41,13 @@ import xin.banghua.beiyuan.SharedPreferences.SharedHelper;
 public class Userset extends AppCompatActivity {
     private Context mContext;
     //昵称，年龄，地区
-    EditText userNickname_et,userAge_et,userRegion_et,userSignature_et;
+    EditText userNickname_et,userAge_et,userRegion_et,userSignature_et,referral_et;
     //性别，标签
     RadioGroup userGender_rg,userProperty_rg;
     RadioButton male_rb,female_rb,zProperty_rb,bProperty_rb,dProperty_rb;
 
     //
-    String logtype,userAccount,userPassword,userNickname,userAge,userRegion,userGender,userProperty,userPortrait,userSignature;
+    String logtype,userAccount,userPassword,userNickname,userAge,userRegion,userGender,userProperty,userPortrait,userSignature,referral;
     Button submit_btn;
     //
     ImageView userPortrait_iv;
@@ -74,6 +75,7 @@ public class Userset extends AppCompatActivity {
         userPortrait_iv = findViewById(R.id.userPortrait);
         userPortrait_iv.setImageResource(R.drawable.favicon);
         userSignature_et = findViewById(R.id.userSignature);
+        referral_et = findViewById(R.id.referral_et);
 
 
 
@@ -109,6 +111,7 @@ public class Userset extends AppCompatActivity {
                 userSignature = userSignature_et.getText().toString();
                 userGender = ((RadioButton) findViewById(userGender_rg.getCheckedRadioButtonId())).getText().toString();
                 userProperty = ((RadioButton) findViewById(userProperty_rg.getCheckedRadioButtonId())).getText().toString();
+                referral = referral_et.getText().toString();
 
                 if (logtype.equals("1")){
                     postSignUp("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signup&m=socialchat");
@@ -119,6 +122,7 @@ public class Userset extends AppCompatActivity {
 
     }
 
+    @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -157,6 +161,7 @@ public class Userset extends AppCompatActivity {
                         .addFormDataPart("userProperty", userProperty)
                         .addFormDataPart("userSignature", userSignature)
                         .addFormDataPart("userPortrait",fileName,RequestBody.create(new File(userPortrait),MEDIA_TYPE_PNG))
+                        .addFormDataPart("referral",referral)
                         .build();
                 Request request = new Request.Builder()
                         .url(url)

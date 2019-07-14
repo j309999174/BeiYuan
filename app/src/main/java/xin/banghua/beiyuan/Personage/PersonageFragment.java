@@ -112,6 +112,8 @@ public class PersonageFragment extends Fragment {
         });
 
         getDataPersonage("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=personage&m=socialchat");
+
+        addSawMe("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addsawme&m=socialchat");
     }
 
     public void initPersonage(View view,JSONObject jsonObject) throws JSONException {
@@ -216,6 +218,39 @@ public class PersonageFragment extends Fragment {
                     message.what=1;
                     Log.d(TAG, "run: getDataPersonage"+message.obj.toString());
                     handler.sendMessageDelayed(message,10);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    //TODO okhttp谁看过我
+    public void addSawMe(final String url){
+        new Thread(new Runnable() {
+            @Override
+            public void run(){
+                SharedHelper shuserinfo = new SharedHelper(getActivity().getApplicationContext());
+                String yourid = shuserinfo.readUserInfo().get("userID");
+                String yournickname = shuserinfo.readUserInfo().get("userNickName");
+                String yourportrait = shuserinfo.readUserInfo().get("userPortrait");
+                OkHttpClient client = new OkHttpClient();
+                RequestBody formBody = new FormBody.Builder()
+                        .add("myid", mUserID)
+                        .add("yourid", yourid)
+                        .add("yournickname", yournickname)
+                        .add("yourportrait", yourportrait)
+                        .build();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(formBody)
+                        .build();
+
+                try (Response response = client.newCall(request).execute()) {
+                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+                    Log.d(TAG, "run: 谁看过我"+request.body().toString());
+
                 }catch (Exception e) {
                     e.printStackTrace();
                 }

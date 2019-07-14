@@ -152,6 +152,20 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
+            <EditText
+                android:id="@+id/referral_et"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="推荐码（选填）"
+                android:inputType="textPersonName" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
             <Button
                 android:id="@+id/submit_btn"
                 android:layout_width="wrap_content"

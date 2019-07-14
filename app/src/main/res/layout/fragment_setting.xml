@@ -7,7 +7,8 @@
 
     <TableLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="15dp">
 
         <TableRow
             android:layout_width="match_parent"
@@ -24,10 +25,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/phone_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="绑定手机" />
@@ -35,10 +36,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/email_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="绑定邮箱" />
@@ -46,10 +47,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button3"
+                android:id="@+id/password_reset"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="密码设置" />
@@ -57,10 +58,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/private_set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="隐私" />
@@ -68,10 +69,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button5"
+                android:id="@+id/common_set"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="通用" />
@@ -79,10 +80,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button6"
+                android:id="@+id/feedback_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="意见反馈" />
@@ -90,10 +91,10 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button7"
+                android:id="@+id/help_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="帮助中心" />
@@ -101,14 +102,27 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <Button
-                android:id="@+id/button8"
+                android:id="@+id/version_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="当前版本" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <Button
+                android:id="@+id/logout_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="退出登录" />
+        </TableRow>
+
     </TableLayout>
+
 </FrameLayout>
