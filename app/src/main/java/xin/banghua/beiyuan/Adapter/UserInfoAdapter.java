@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 import xin.banghua.beiyuan.Personage.PersonageActivity;
 import xin.banghua.beiyuan.R;
-import xin.banghua.beiyuan.SharedPreferences.SharedHelper;
 
 public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHolder>{
     private static final String TAG = "UserInfoAdapter";
@@ -112,7 +111,7 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHo
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userID = itemView.findViewById(R.id.userID);
-            userPortrait = itemView.findViewById(R.id.userPortrait);
+            userPortrait = itemView.findViewById(R.id.authportrait);
             userNickName = itemView.findViewById(R.id.userNickName);
             userAge = itemView.findViewById(R.id.userAge);
             userGender = itemView.findViewById(R.id.userGender);

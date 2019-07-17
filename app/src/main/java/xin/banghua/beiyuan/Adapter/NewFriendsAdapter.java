@@ -107,7 +107,7 @@ public class NewFriendsAdapter extends RecyclerView.Adapter<NewFriendsAdapter.Vi
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userID = itemView.findViewById(R.id.userID);
-            userPortrait = itemView.findViewById(R.id.userPortrait);
+            userPortrait = itemView.findViewById(R.id.authportrait);
             userNickName = itemView.findViewById(R.id.userNickName);
             userLeaveWords = itemView.findViewById(R.id.userLeaveWords);
             agree_btn = itemView.findViewById(R.id.agree_btn);

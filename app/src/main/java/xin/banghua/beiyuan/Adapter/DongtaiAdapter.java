@@ -91,7 +91,7 @@ public class DongtaiAdapter extends RecyclerView.Adapter<DongtaiAdapter.ViewHold
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userID = itemView.findViewById(R.id.userID);
-            userPortrait = itemView.findViewById(R.id.userPortrait);
+            userPortrait = itemView.findViewById(R.id.authportrait);
             userNickName = itemView.findViewById(R.id.userNickName);
             dongtaiWord = itemView.findViewById(R.id.dongtaiWord);
             dongtaiImage = itemView.findViewById(R.id.dongtaiImage);

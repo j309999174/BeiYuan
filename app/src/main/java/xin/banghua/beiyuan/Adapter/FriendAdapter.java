@@ -128,7 +128,7 @@ public class FriendAdapter extends RecyclerView.Adapter<FriendAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             userID = itemView.findViewById(R.id.userID);
-            userPortrait = itemView.findViewById(R.id.userPortrait);
+            userPortrait = itemView.findViewById(R.id.authportrait);
             userNickName = itemView.findViewById(R.id.userNickName);
             userLeaveWords = itemView.findViewById(R.id.userLeaveWords);
 

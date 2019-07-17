@@ -13,7 +13,7 @@
         android:visibility="gone" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/userPortrait"
+        android:id="@+id/authportrait"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:src="@mipmap/ic_launcher" />
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@id/userPortrait"
+        android:layout_toRightOf="@id/authportrait"
         android:text="userNickName"
         android:textSize="18sp" />
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@id/userPortrait"
+        android:layout_toRightOf="@id/authportrait"
         android:text="18"
         android:textSize="15sp" />
 
@@ -73,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="30dp"
-        android:layout_toRightOf="@id/userPortrait"
+        android:layout_toRightOf="@id/authportrait"
         android:text="北京"
         android:textSize="15sp" />
 

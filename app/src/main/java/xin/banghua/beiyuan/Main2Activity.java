@@ -147,7 +147,7 @@ public class Main2Activity extends AppCompatActivity implements RongIM.UserInfoP
         final PullLoadMoreRecyclerView recyclerView = view.findViewById(R.id.haoyou_RecyclerView);
         adapter = new FriendAdapter(Main2Activity.this,friendList);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLinearLayout();;
+        recyclerView.setLinearLayout();
         recyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
             @Override
             public void onRefresh() {

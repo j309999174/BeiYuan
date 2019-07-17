@@ -15,19 +15,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import net.alhazmy13.mediapicker.Image.ImagePicker;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.ListIterator;
 
-import okhttp3.FormBody;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -36,7 +31,6 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import xin.banghua.beiyuan.MainActivity;
 import xin.banghua.beiyuan.R;
-import xin.banghua.beiyuan.SharedPreferences.SharedHelper;
 
 public class Userset extends AppCompatActivity {
     private Context mContext;
@@ -72,7 +66,7 @@ public class Userset extends AppCompatActivity {
         bProperty_rb = findViewById(R.id.bProperty);
         dProperty_rb = findViewById(R.id.dProperty);
         submit_btn = findViewById(R.id.submit_btn);
-        userPortrait_iv = findViewById(R.id.userPortrait);
+        userPortrait_iv = findViewById(R.id.authportrait);
         userPortrait_iv.setImageResource(R.drawable.favicon);
         userSignature_et = findViewById(R.id.userSignature);
         referral_et = findViewById(R.id.referral_et);

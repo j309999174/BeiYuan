@@ -21,7 +21,7 @@
                 android:visibility="gone" />
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/userPortrait"
+                android:id="@+id/authportrait"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@mipmap/ic_launcher" />
