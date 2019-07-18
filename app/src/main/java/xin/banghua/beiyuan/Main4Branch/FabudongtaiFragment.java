@@ -1,6 +1,7 @@
 package xin.banghua.beiyuan.Main4Branch;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -123,6 +124,7 @@ public class FabudongtaiFragment extends Fragment {
     }
 
 
+    @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {

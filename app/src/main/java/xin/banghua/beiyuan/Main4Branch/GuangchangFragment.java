@@ -199,6 +199,7 @@ public class GuangchangFragment extends Fragment implements BaseSliderView.OnSli
             @Override
             public void onRefresh() {
 
+                mDemoSlider.setVisibility(View.VISIBLE);
                 Log.d(TAG, "onRefresh: start");
                 recyclerView.setPullLoadMoreCompleted();
             }
@@ -206,6 +207,7 @@ public class GuangchangFragment extends Fragment implements BaseSliderView.OnSli
             @Override
             public void onLoadMore() {
 
+                mDemoSlider.setVisibility(View.GONE);
                 Log.d(TAG, "onLoadMore: start");
                 recyclerView.setPullLoadMoreCompleted();
             }

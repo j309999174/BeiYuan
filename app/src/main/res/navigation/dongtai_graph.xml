@@ -43,6 +43,9 @@
         <action
             android:id="@+id/luntan_guangchang_action"
             app:destination="@id/guangchangFragment" />
+        <action
+            android:id="@+id/luntan_fabutiezi_action"
+            app:destination="@id/fabutieziFragment" />
     </fragment>
     <fragment
         android:id="@+id/fabudongtaiFragment"
@@ -55,5 +58,14 @@
         <action
             android:id="@+id/fabudongtai_guanzhu_action"
             app:destination="@id/guanzhuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fabutieziFragment"
+        android:name="xin.banghua.beiyuan.Main4Branch.FabutieziFragment"
+        android:label="fragment_fabutiezi"
+        tools:layout="@layout/fragment_fabutiezi" >
+        <action
+            android:id="@+id/fabutiezi_luntan_action"
+            app:destination="@id/luntanFragment" />
     </fragment>
 </navigation>

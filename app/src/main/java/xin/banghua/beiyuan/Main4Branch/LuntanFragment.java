@@ -7,6 +7,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -95,6 +96,7 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
 
         initNavigateButton(view);
         initSubnavigationButton(view);
+        initTieziRelease(view);
     }
 
     //三个按钮初始化
@@ -124,40 +126,49 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDataGonggao("");
-                getDataSlider("","自拍");
-                getDataPostlist("","自拍");
+                marqueeTv.setVisibility(View.GONE);
+                getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","自拍");
+                getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","自拍");
             }
         });
         button3 = view.findViewById(R.id.button3);
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDataGonggao("");
-                getDataSlider("","真实");
-                getDataPostlist("","真实");
+                marqueeTv.setVisibility(View.GONE);
+                getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","真实");
+                getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","真实");
             }
         });
         button4 = view.findViewById(R.id.button4);
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDataGonggao("");
-                getDataSlider("","情感");
-                getDataPostlist("","情感");
+                marqueeTv.setVisibility(View.GONE);
+                getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","情感");
+                getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","情感");
             }
         });
         button5 = view.findViewById(R.id.button5);
         button5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDataGonggao("");
-                getDataSlider("","大圈");
-                getDataPostlist("","大圈");
+                marqueeTv.setVisibility(View.GONE);
+                getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","大圈");
+                getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","大圈");
             }
         });
     }
-
+    //发布帖子
+    private void initTieziRelease(View view) {
+        FloatingActionButton floatingActionButton = view.findViewById(R.id.luntanRelease);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Navigation.findNavController(v).navigate(R.id.luntan_fabutiezi_action);
+            }
+        });
+    }
     private void initGonggao(View view,JSONArray jsonArray) throws JSONException {
         if (jsonArray.length()>0){
             strs = new String[jsonArray.length()];
@@ -177,7 +188,7 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
     //TODO 幻灯片相关
     private void initSlider(View view,JSONArray jsonArray) throws JSONException {
         mDemoSlider = view.findViewById(R.id.luntan_slider);
-
+        mDemoSlider.removeAllSliders();
         HashMap<String,String> url_maps = new HashMap<String, String>();
         if (jsonArray.length()>0){
             for (int i=0;i<jsonArray.length();i++){
@@ -200,8 +211,10 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
             textSliderView.getBundle()
                     .putString("extra",name);
 
+
             mDemoSlider.addSlider(textSliderView);
         }
+
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -235,6 +248,7 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
     @SuppressLint("ClickableViewAccessibility")
     private void initPostList(View view, JSONArray jsonArray) throws JSONException {
         Log.d(TAG, "initPostList: start");
+        luntanLists.clear();
         if (jsonArray.length()>0){
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
@@ -253,6 +267,8 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
             public void onRefresh() {
 
                 Log.d(TAG, "onRefresh: start");
+                marqueeTv.setVisibility(View.VISIBLE);
+                mDemoSlider.setVisibility(View.VISIBLE);
                 recyclerView.setPullLoadMoreCompleted();
             }
 

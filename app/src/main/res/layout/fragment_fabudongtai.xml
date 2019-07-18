@@ -23,7 +23,8 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="感言" />
+                android:text="感言"
+                android:textAlignment="viewStart" />
         </TableRow>
 
         <TableRow
