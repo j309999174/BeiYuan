@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -49,6 +50,14 @@ public class ResetActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat");
+            }
+        });
+
+        ImageView back_btn = findViewById(R.id.iv_back_left);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 

@@ -30,7 +30,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Main5Branch.ResetActivity"></activity>
+        <activity android:name=".Main4Branch.FabugentieActivity"></activity>
+        <activity android:name=".Main4Branch.PostListActivity" />
+        <activity android:name=".Main5Branch.ResetActivity" />
         <activity android:name=".Main5Branch.SawMeActivity" />
         <activity android:name=".Main5Branch.CircleActivity" />
         <activity android:name=".Main2Branch.NewFriend" />

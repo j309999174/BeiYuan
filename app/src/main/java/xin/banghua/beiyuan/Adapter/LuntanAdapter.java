@@ -1,6 +1,7 @@
 package xin.banghua.beiyuan.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +17,8 @@ import com.bumptech.glide.Glide;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import xin.banghua.beiyuan.Main4Branch.PostListActivity;
+import xin.banghua.beiyuan.Personage.PersonageActivity;
 import xin.banghua.beiyuan.R;
 
 public class LuntanAdapter extends RecyclerView.Adapter<LuntanAdapter.ViewHolder> {
@@ -67,19 +70,48 @@ public class LuntanAdapter extends RecyclerView.Adapter<LuntanAdapter.ViewHolder
         viewHolder.time.setText(currentItem.getTime());
 
 
+        viewHolder.authnickname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PersonageActivity.class);
+                intent.putExtra("userID",currentItem.getAuthid());
+                v.getContext().startActivity(intent);
+            }
+        });
+        viewHolder.authportrait.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PersonageActivity.class);
+                intent.putExtra("userID",currentItem.getAuthid());
+                v.getContext().startActivity(intent);
+            }
+        });
 
+        viewHolder.posttitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PostListActivity.class);
+                intent.putExtra("postid",currentItem.getId());
+                v.getContext().startActivity(intent);
+            }
+        });
+        viewHolder.posttext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PostListActivity.class);
+                intent.putExtra("postid",currentItem.getId());
+                v.getContext().startActivity(intent);
+            }
+        });
+        viewHolder.postpicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PostListActivity.class);
+                intent.putExtra("postid",currentItem.getId());
+                v.getContext().startActivity(intent);
+            }
+        });
 
-//        viewHolder.haoyouLayout.setOnClickListener(new View.OnClickListener(){
-//
-//            @Override
-//            public void onClick(View v) {
-//                Log.d(TAG, "onClick: rongyun开始");
-//                //启动会话界面
-//                if (RongIM.getInstance() != null) {
-//                    RongIM.getInstance().startPrivateChat(mContext, currentItem.getmUserID(), currentItem.getmUserNickName());
-//                }
-//            }
-//        });
     }
 
     @Override
