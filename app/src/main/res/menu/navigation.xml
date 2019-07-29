@@ -3,25 +3,25 @@
 
     <item
         android:id="@+id/navigation_shenbian"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/shenbian1"
         android:title="@string/title_shenbian" />
 
     <item
         android:id="@+id/navigation_xiaoxi"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/xiaoxi1"
         android:title="@string/title_xiaoxi" />
     <item
         android:id="@+id/navigation_haoyou"
-        android:icon="@drawable/ic_dashboard_black_24dp"
+        android:icon="@drawable/haoyou1"
         android:title="@string/title_haoyou" />
 
     <item
         android:id="@+id/navigation_dongtai"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/dongtai1"
         android:title="@string/title_dongtai" />
     <item
         android:id="@+id/navigation_wode"
-        android:icon="@drawable/ic_notifications_black_24dp"
+        android:icon="@drawable/wode1"
         android:title="@string/title_wode" />
 
 </menu>

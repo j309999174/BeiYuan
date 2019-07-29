@@ -28,6 +28,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/authportrait"
         android:text="userNickName"
+        android:textColor="@color/colorPrimary"
         android:textSize="18sp" />
 
     <TextView
@@ -37,15 +38,17 @@
         android:layout_centerVertical="true"
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/authportrait"
-        android:text="userLeaveWords" />
+        android:text="userLeaveWords"
+        android:textColor="@color/rc_ext_root_menu_item_text_color" />
 
     <Button
         android:id="@+id/agree_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="同意"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="80dp"
-        android:layout_toRightOf="@id/userLeaveWords"/>
+        android:layout_marginLeft="280dp"
+        android:background="@color/rc_conversation_top_bg"
+        android:text="同意"
+        android:textColor="@color/colorAccent" />
 
 </RelativeLayout>

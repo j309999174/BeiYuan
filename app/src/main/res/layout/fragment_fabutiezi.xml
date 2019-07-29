@@ -20,7 +20,8 @@
                 android:id="@+id/release_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="发布" />
+                android:text="发布"
+                android:textColor="@color/colorAccent" />
         </TableRow>
 
         <TableRow

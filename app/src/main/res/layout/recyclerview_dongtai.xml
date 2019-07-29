@@ -32,6 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="userNickName"
+                android:textColor="@color/colorPrimary"
                 android:textSize="22sp" />
         </TableRow>
 
@@ -45,7 +46,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="18"
-                android:textSize="15sp" />
+                android:textColor="@color/rc_ext_root_menu_item_text_color"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -70,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="2019-6-21 19:00:00"
+                android:textColor="@color/rc_ext_sub_menu_item_text_color"
                 android:textSize="15sp" />
 
         </TableRow>
@@ -81,7 +84,8 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#555555" />
+                android:background="#555555"
+                android:padding="3dp"/>
         </TableRow>
     </TableLayout>
 

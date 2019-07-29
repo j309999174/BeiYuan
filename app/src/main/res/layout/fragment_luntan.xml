@@ -137,7 +137,7 @@
                 android:layout_gravity="center"
                 android:clickable="true"
                 app:backgroundTint="@color/colorPrimary"
-                app:srcCompat="@drawable/ic_done_black_24dp" />
+                app:srcCompat="@drawable/rc_ext_tab_add" />
         </TableRow>
     </TableLayout>
 </FrameLayout>

@@ -64,7 +64,23 @@ public class MeFragment extends Fragment {
 
     private void initData(View view) {
         userportrait_iv = view.findViewById(R.id.userportrait_iv);
+        userportrait_iv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,ResetActivity.class);
+                intent.putExtra("title","头像设置");
+                startActivity(intent);
+            }
+        });
         usernickname_tv = view.findViewById(R.id.usernickname_tv);
+        usernickname_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext,ResetActivity.class);
+                intent.putExtra("title","昵称设置");
+                startActivity(intent);
+            }
+        });
         beiyuanid_btn = view.findViewById(R.id.beiyuanid_btn);
         personalinfo_btn = view.findViewById(R.id.personalinfo_btn);
         xiangce_btn = view.findViewById(R.id.xiangce_btn);

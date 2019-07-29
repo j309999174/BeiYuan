@@ -1,6 +1,10 @@
 package xin.banghua.beiyuan.Main5Branch;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -12,16 +16,28 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
+import net.alhazmy13.mediapicker.Image.ImagePicker;
+
+import java.io.File;
 import java.io.IOException;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.FormBody;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import xin.banghua.beiyuan.Main5Activity;
 import xin.banghua.beiyuan.R;
 import xin.banghua.beiyuan.SharedPreferences.SharedHelper;
+import xin.banghua.beiyuan.Signin.Userset;
 
 public class ResetActivity extends AppCompatActivity {
 
@@ -30,8 +46,9 @@ public class ResetActivity extends AppCompatActivity {
     Button submit_btn;
     EditText value_et;
     TextView title_tv;
+    CircleImageView portrait;
 
-    String title;
+    String title,userPortrait,value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,11 +62,43 @@ public class ResetActivity extends AppCompatActivity {
         value_et.setHint(title);
         title_tv = findViewById(R.id.title_tv);
         title_tv.setText(title);
+        portrait = findViewById(R.id.portrait);
+
+        if (title.equals("头像设置")){
+            SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
+            String myportrait = shuserinfo.readUserInfo().get("userPortrait");
+            value_et.setVisibility(View.GONE);
+            portrait.setVisibility(View.VISIBLE);
+            Glide.with(this)
+                    .asBitmap()
+                    .load(myportrait)
+                    .into(portrait);
+        }
+
+        portrait.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new ImagePicker.Builder(ResetActivity.this)
+                        .mode(ImagePicker.Mode.CAMERA_AND_GALLERY)
+                        .compressLevel(ImagePicker.ComperesLevel.MEDIUM)
+                        .directory(ImagePicker.Directory.DEFAULT)
+                        .extension(ImagePicker.Extension.PNG)
+                        .scale(600, 600)
+                        .allowMultipleImages(false)
+                        .enableDebuggingMode(true)
+                        .build();
+            }
+        });
 
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat");
+                if (title.equals("头像设置")){
+                    setUserPortrait("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat");
+                }else {
+                    submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat");
+                }
+
             }
         });
 
@@ -70,10 +119,28 @@ public class ResetActivity extends AppCompatActivity {
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
-            finish();
+            switch (msg.what){
+                case 1:
+                    if (title.equals("昵称设置")){
+                        SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString("userNickName", value);
+                        editor.commit();
+                    }
+                    break;
+                case 2:
+                    SharedPreferences sp = getSharedPreferences("userInfo", Context.MODE_PRIVATE);
+                    Log.d(TAG, "handleMessage: 修改头像"+msg.obj.toString());
+                    SharedPreferences.Editor editor = sp.edit();
+                    editor.putString("userPortrait", msg.obj.toString());
+                    editor.commit();
+                    break;
+            }
+            Intent intent = new Intent(ResetActivity.this, Main5Activity.class);
+            startActivity(intent);
         }
     };
-    //TODO okhttp获取用户信息
+    //TODO okhttp设置手机，密码，邮箱,昵称
     public void submitValue(final String url){
         new Thread(new Runnable() {
             @Override
@@ -81,7 +148,7 @@ public class ResetActivity extends AppCompatActivity {
                 SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
                 String myid = shuserinfo.readUserInfo().get("userID");
 
-                String value = value_et.getText().toString();
+                value = value_et.getText().toString();
 
                 OkHttpClient client = new OkHttpClient();
                 RequestBody formBody = new FormBody.Builder()
@@ -106,5 +173,65 @@ public class ResetActivity extends AppCompatActivity {
                 }
             }
         }).start();
+    }
+
+    //TODO 注册 form形式的post
+    public void setUserPortrait(final String url){
+        new Thread(new Runnable() {
+            @Override
+            public void run(){
+                //获取文件名
+                Log.d("进入run","run");
+                File tempFile =new File(userPortrait.trim());
+                String fileName = tempFile.getName();
+                //用户id
+                SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
+                String myid = shuserinfo.readUserInfo().get("userID");
+                //开始网络传输
+                OkHttpClient client = new OkHttpClient();
+                MediaType MEDIA_TYPE_PNG = MediaType.parse("image");
+                RequestBody requestBody = new MultipartBody.Builder()
+                        .setType(MultipartBody.FORM)
+                        .addFormDataPart("type", title)
+                        .addFormDataPart("userID", myid)
+                        .addFormDataPart("userPortrait",fileName,RequestBody.create(new File(userPortrait),MEDIA_TYPE_PNG))
+                        .build();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(requestBody)
+                        .build();
+                Log.d("进入try","try");
+                try (Response response = client.newCall(request).execute()) {
+                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                    //Log.d("form形式的post",response.body().string());
+                    //格式：{"error":"0","info":"登陆成功"}
+                    Message message=handler.obtainMessage();
+                    message.what=2;
+                    message.obj=response.body().string();
+                    handler.sendMessageDelayed(message,10);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == ImagePicker.IMAGE_PICKER_REQUEST_CODE && resultCode == RESULT_OK) {
+            List<String> mPaths = data.getStringArrayListExtra(ImagePicker.EXTRA_IMAGE_PATH);
+            //Your Code
+            ListIterator<String> listIterator = mPaths.listIterator();
+            while (listIterator.hasNext()){
+                String mPath = listIterator.next();
+                Log.d("path", mPath);
+                portrait.setImageURI(Uri.parse(mPath));
+                userPortrait = mPath;
+            }
+        }
     }
 }

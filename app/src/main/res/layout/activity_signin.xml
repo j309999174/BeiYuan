@@ -7,8 +7,13 @@
     tools:context=".Signin.SigninActivity">
 
     <TableLayout
+        android:id="@+id/tableLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:gravity="center"
         android:orientation="vertical"
         android:stretchColumns="*"
@@ -71,14 +76,29 @@
                 android:id="@+id/signin_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="登录" />
+                android:text="登录"
+                android:textColor="@color/colorPrimary"
+                android:textSize="14sp" />
 
             <Button
                 android:id="@+id/signup_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="注册" />
+                android:text="注册"
+                android:textColor="@color/design_default_color_primary_dark" />
 
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button"
+                android:visibility="invisible" />
         </TableRow>
 
         <TableRow
@@ -90,7 +110,10 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="第三方登录" />
+                android:text="第三方登录"
+                android:textAlignment="center"
+                android:textColor="@color/rc_ext_sub_menu_item_text_color"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -102,7 +125,8 @@
                 android:id="@+id/wxLogin_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="微信登录" />
+                android:text="微信登录"
+                android:textColor="@color/rc_picsel_toolbar_send_pressed" />
         </TableRow>
 
     </TableLayout>

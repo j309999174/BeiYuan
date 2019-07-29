@@ -78,7 +78,7 @@ public class UserInfoAdapter extends RecyclerView.Adapter<UserInfoAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: "+mUserID.get(i));
-                Toast.makeText(mContext,mUserID.get(i)+mUserNickName.get(i),Toast.LENGTH_LONG).show();
+                //Toast.makeText(mContext,mUserID.get(i)+mUserNickName.get(i),Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(v.getContext(), PersonageActivity.class);
                 intent.putExtra("userID",mUserID.get(i));
                 //保存选中的用户id

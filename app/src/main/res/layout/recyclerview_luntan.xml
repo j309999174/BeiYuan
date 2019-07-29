@@ -47,7 +47,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/authportrait"
-        android:text="userNickName" />
+        android:text="userNickName"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/time"
@@ -56,7 +58,8 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:layout_toRightOf="@id/authportrait"
-        android:text="publishTime" />
+        android:text="publishTime"
+        android:textColor="@color/rc_ext_sub_menu_item_text_color" />
 
     <TextView
         android:id="@+id/posttip"
@@ -65,7 +68,8 @@
         android:layout_marginLeft="250dp"
         android:layout_marginTop="30dp"
         android:layout_toRightOf="@id/authportrait"
-        android:text="TextView" />
+        android:text="TextView"
+        android:textColor="@color/rc_draft_color" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -82,6 +86,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="@color/colorPrimary"
                 android:textSize="20dp" />
 
         </TableRow>
@@ -94,7 +99,8 @@
                 android:id="@+id/posttext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/rc_ext_root_menu_item_text_color" />
         </TableRow>
 
         <TableRow
@@ -136,6 +142,7 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#555555"
-        android:layout_alignParentBottom="true"/>
+        android:layout_alignParentBottom="true"
+        android:padding="3dp"/>
 
 </RelativeLayout>

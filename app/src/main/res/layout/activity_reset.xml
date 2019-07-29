@@ -33,13 +33,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="TextView"
-            android:textAlignment="center" />
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="24sp" />
 
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:stretchColumns="*">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/portrait"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:visibility="gone"
+                    tools:srcCompat="@tools:sample/avatars" />
+            </TableRow>
 
             <TableRow
                 android:layout_width="match_parent"

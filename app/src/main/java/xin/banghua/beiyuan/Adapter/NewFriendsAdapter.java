@@ -79,7 +79,7 @@ public class NewFriendsAdapter extends RecyclerView.Adapter<NewFriendsAdapter.Vi
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "onClick: clicked on: " + mUserID.get(i));
-                    Toast.makeText(mContext, mUserID.get(i) + mUserNickName.get(i), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(mContext, mUserID.get(i) + mUserNickName.get(i), Toast.LENGTH_LONG).show();
                     viewHolder_btn = viewHolder;
                     agreeFriend("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=agreefriend&m=socialchat",mUserID.get(i),mUserPortrait.get(i),mUserNickName.get(i));
                 }

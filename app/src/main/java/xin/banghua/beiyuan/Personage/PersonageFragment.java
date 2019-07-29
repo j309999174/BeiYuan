@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.FormBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -50,7 +51,7 @@ public class PersonageFragment extends Fragment {
 
 
     private TextView mUserNickName_tv;
-    private ImageView mUserPortrait_iv;
+    private CircleImageView mUserPortrait_iv;
     private TextView mUserAge_tv;
     private TextView mUserRegion_tv;
     private TextView mUserGender_tv;

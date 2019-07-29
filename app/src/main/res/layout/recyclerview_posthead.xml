@@ -19,6 +19,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="TextView"
+                android:textColor="@color/colorPrimary"
                 android:textSize="30sp" />
         </TableRow>
 
@@ -45,6 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="userNickName"
+                android:textColor="@color/colorAccent"
                 android:textSize="15sp" />
         </TableRow>
 
@@ -56,7 +58,9 @@
                 android:id="@+id/posttext"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/rc_ext_root_menu_item_text_color"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -115,7 +119,8 @@
                 android:id="@+id/time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="TextView"
+                android:textColor="@color/rc_ext_sub_menu_item_text_color" />
 
         </TableRow>
     </TableLayout>

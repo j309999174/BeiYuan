@@ -69,7 +69,7 @@ public class DongtaiAdapter extends RecyclerView.Adapter<DongtaiAdapter.ViewHold
             @Override
             public void onClick(View v) {
                 Log.d(TAG, "onClick: clicked on: "+mUserID.get(i));
-                Toast.makeText(mContext,mUserID.get(i)+mUserNickName.get(i),Toast.LENGTH_LONG).show();
+                //Toast.makeText(mContext,mUserID.get(i)+mUserNickName.get(i),Toast.LENGTH_LONG).show();
             }
         });
     }
