@@ -27,27 +27,42 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/authid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="userID"
-                android:visibility="gone" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/authportrait"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@mipmap/ic_launcher" />
+                <TextView
+                    android:id="@+id/authid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="userID"
+                    android:visibility="gone" />
 
-            <TextView
-                android:id="@+id/authnickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="userNickName"
-                android:textColor="@color/colorAccent"
-                android:textSize="15sp" />
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/authportrait"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@mipmap/ic_launcher" />
+
+                <TextView
+                    android:id="@+id/authnickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="80dp"
+                    android:text="userNickName"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/louzhu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="280dp"
+                    android:text="楼主"
+                    android:textColor="@color/design_default_color_primary_dark"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
         </TableRow>
 
         <TableRow
@@ -61,6 +76,21 @@
                 android:text="TextView"
                 android:textColor="@color/rc_ext_root_menu_item_text_color"
                 android:textSize="18sp" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textColor="@color/rc_ext_sub_menu_item_text_color"
+                android:textSize="14sp"
+                android:textStyle="italic" />
+
         </TableRow>
 
         <TableRow
@@ -111,18 +141,6 @@
 
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="@color/rc_ext_sub_menu_item_text_color" />
-
-        </TableRow>
     </TableLayout>
     <View
         android:layout_width="match_parent"

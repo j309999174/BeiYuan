@@ -67,7 +67,7 @@ public class Userset extends AppCompatActivity {
         dProperty_rb = findViewById(R.id.dProperty);
         submit_btn = findViewById(R.id.submit_btn);
         userPortrait_iv = findViewById(R.id.authportrait);
-        userPortrait_iv.setImageResource(R.drawable.favicon);
+        userPortrait_iv.setImageResource(R.drawable.plus);
         userSignature_et = findViewById(R.id.userSignature);
         referral_et = findViewById(R.id.referral_et);
 

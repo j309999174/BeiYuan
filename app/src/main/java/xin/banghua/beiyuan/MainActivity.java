@@ -158,7 +158,9 @@ public class MainActivity extends AppCompatActivity {
             Log.d(TAG, "localization: longitude:"+location.getLongitude());
             //保存定位值
             SharedHelper shlocation = new SharedHelper(getApplicationContext());
-            shlocation.saveLocation(location.getLatitude()+"",location.getLongitude()+"");
+            Float latitude = (float)(Math.round(location.getLatitude()*10))/10;
+            Float longitude = (float)(Math.round(location.getLongitude()*10))/10;
+            shlocation.saveLocation(latitude+"",longitude+"");
         }
     }
 

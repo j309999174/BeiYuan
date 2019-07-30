@@ -54,7 +54,7 @@ public class LuntanAdapter extends RecyclerView.Adapter<LuntanAdapter.ViewHolder
                 .asBitmap()
                 .load(currentItem.getAuthportrait())
                 .into(viewHolder.authportrait);
-        viewHolder.posttip.setText(currentItem.getPosttip());
+        viewHolder.posttip.setText(currentItem.getPosttip().isEmpty()?currentItem.getPosttip():"");
         viewHolder.posttitle.setText(currentItem.getPosttitle());
         viewHolder.posttext.setText(currentItem.getPosttext());
         if (currentItem.getPostpicture()[0].isEmpty()){

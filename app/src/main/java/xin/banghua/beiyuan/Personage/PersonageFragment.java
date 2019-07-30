@@ -3,6 +3,7 @@ package xin.banghua.beiyuan.Personage;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -32,6 +33,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import xin.banghua.beiyuan.MainActivity;
 import xin.banghua.beiyuan.ParseJSON.ParseJSONObject;
 import xin.banghua.beiyuan.R;
 import xin.banghua.beiyuan.SharedPreferences.SharedHelper;
@@ -156,6 +158,8 @@ public class PersonageFragment extends Fragment {
                     break;
                 case 2:
                     Toast.makeText(mContext,"已申请好友",Toast.LENGTH_LONG);
+                    Intent intent = new Intent(mContext, MainActivity.class);
+                    startActivity(intent);
                     break;
             }
         }
@@ -216,7 +220,7 @@ public class PersonageFragment extends Fragment {
 
                     Message message=handler.obtainMessage();
                     message.obj=response.body().string();
-                    message.what=1;
+                    message.what=2;
                     Log.d(TAG, "run: getDataPersonage"+message.obj.toString());
                     handler.sendMessageDelayed(message,10);
                 }catch (Exception e) {

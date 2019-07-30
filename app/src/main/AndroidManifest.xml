@@ -25,12 +25,12 @@
     <application
         android:name=".App"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Main4Branch.FabugentieActivity"></activity>
+        <activity android:name=".Main4Branch.FabugentieActivity" />
         <activity android:name=".Main4Branch.PostListActivity" />
         <activity android:name=".Main5Branch.ResetActivity" />
         <activity android:name=".Main5Branch.SawMeActivity" />

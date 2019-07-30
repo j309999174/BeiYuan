@@ -35,7 +35,7 @@ public class LaunchActivity extends Activity {
     //启动图
     private void initLaunchImage(){
         launchImage = findViewById(R.id.launchImage);
-        launchImage.setImageResource(R.drawable.icon);
+        launchImage.setImageResource(R.drawable.launch);
     }
 
     //1.检测权限

@@ -85,7 +85,7 @@ public class FabudongtaiFragment extends Fragment {
         yes_rb = mView.findViewById(R.id.yes_rb);
         no_rb = mView.findViewById(R.id.no_rb);
         release_btn = mView.findViewById(R.id.release_btn);
-        dongtaiImage_iv.setImageResource(R.drawable.favicon);
+        dongtaiImage_iv.setImageResource(R.drawable.plus);
         dongtaiImage = "";
 
         dongtaiImage_iv.setOnClickListener(new View.OnClickListener() {

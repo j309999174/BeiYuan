@@ -1,5 +1,6 @@
 package xin.banghua.beiyuan.Main2Branch;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
@@ -88,6 +89,7 @@ public class NewFriend extends AppCompatActivity {
         });
     }
     //处理返回的数据
+    @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {

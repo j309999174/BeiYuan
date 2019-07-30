@@ -128,6 +128,8 @@ public class PostAdapter extends RecyclerView.Adapter{
                 ((ContentHolder) viewHolder).followpicture3.setVisibility(View.VISIBLE);
             }
             ((ContentHolder) viewHolder).time.setText(currentItem.getTime());
+            ((ContentHolder) viewHolder).louceng.setText(i+"楼");
+
 
         }
     }
@@ -177,6 +179,7 @@ public class PostAdapter extends RecyclerView.Adapter{
         ImageView followpicture2;
         ImageView followpicture3;
         TextView time;
+        TextView louceng;
 
         public ContentHolder(View itemView) {
             super(itemView);
@@ -188,6 +191,7 @@ public class PostAdapter extends RecyclerView.Adapter{
             followpicture2 = itemView.findViewById(R.id.followpicture2);
             followpicture3 = itemView.findViewById(R.id.followpicture3);
             time = itemView.findViewById(R.id.time);
+            louceng = itemView.findViewById(R.id.louceng);
         }
     }
 

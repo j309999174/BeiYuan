@@ -22,8 +22,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="这一刻的想法"
                 android:inputType="textPersonName"
-                android:text="感言"
                 android:textAlignment="viewStart" />
         </TableRow>
 

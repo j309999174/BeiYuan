@@ -1,5 +1,5 @@
-<resources>
-    <string name="app_name">beiyuan</string>
+<resources tools:ignore="MissingTranslation" xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">贝贝屋</string>
     <string name="title_shenbian">身边</string>
     <string name="title_haoyou">好友</string>
     <string name="title_xiaoxi">消息</string>

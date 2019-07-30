@@ -25,7 +25,9 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/authportrait"
         android:text="userNickName"
-        android:textSize="18sp" />
+        android:textColor="@color/rc_ext_root_menu_item_text_color"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/userAge"
@@ -35,6 +37,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/authportrait"
         android:text="18"
+        android:textColor="@color/colorPrimaryDark"
         android:textSize="15sp" />
 
     <TextView
@@ -45,6 +48,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/userAge"
         android:text="男"
+        android:textColor="@color/colorAccent"
         android:textSize="15sp" />
 
     <TextView
@@ -55,6 +59,7 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/userGender"
         android:text="双"
+        android:textColor="@color/rc_voice_cancel"
         android:textSize="15sp" />
 
     <TextView
@@ -62,9 +67,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="90dp"
+        android:layout_marginLeft="70dp"
         android:layout_toRightOf="@id/userProperty"
         android:text="4km"
+        android:textColor="@color/design_default_color_primary"
         android:textSize="15sp" />
 
     <TextView
@@ -75,7 +81,9 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/authportrait"
         android:text="北京"
-        android:textSize="15sp" />
+        android:textColor="@color/rc_rich_content"
+        android:textSize="15sp"
+        android:textStyle="italic" />
 
     <TextView
         android:id="@+id/userVIP"
@@ -85,13 +93,15 @@
         android:layout_marginLeft="30dp"
         android:layout_toRightOf="@id/userRegion"
         android:text="VIP"
-        android:textSize="15sp" />
+        android:textColor="@color/rc_draft_color"
+        android:textSize="15sp"
+        android:textStyle="italic" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="#555555"
             android:layout_alignParentBottom="true"
-            android:padding="3dp"/>
+            android:padding="5dp"/>
 
 </RelativeLayout>

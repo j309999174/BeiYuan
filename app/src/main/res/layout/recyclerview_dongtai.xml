@@ -32,8 +32,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="userNickName"
-                android:textColor="@color/colorPrimary"
-                android:textSize="22sp" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp" />
         </TableRow>
 
         <TableRow
@@ -46,7 +46,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
                 android:text="18"
-                android:textColor="@color/rc_ext_root_menu_item_text_color"
+                android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
         </TableRow>
 
@@ -58,7 +58,7 @@
             <com.zolad.zoominimageview.ZoomInImageView
                 android:id="@+id/dongtaiImage"
                 android:layout_width="300dp"
-                android:layout_height="300dp"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp" />
         </TableRow>
 
@@ -66,14 +66,29 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/dongtaiTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:text="2019-6-21 19:00:00"
-                android:textColor="@color/rc_ext_sub_menu_item_text_color"
-                android:textSize="15sp" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/dongtaiTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="50dp"
+                    android:text="2019-6-21 19:00:00"
+                    android:textColor="@color/rc_ext_sub_menu_item_text_color"
+                    android:textSize="14sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/like"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="280dp"
+                    android:text="赞：232"
+                    android:textColor="@color/rc_draft_color" />
+
+            </RelativeLayout>
 
         </TableRow>
 

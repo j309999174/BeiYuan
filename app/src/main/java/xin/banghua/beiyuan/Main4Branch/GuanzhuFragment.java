@@ -190,25 +190,25 @@ public class GuanzhuFragment extends Fragment implements BaseSliderView.OnSlider
     private void initRecyclerView(View view){
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
-        final PullLoadMoreRecyclerView recyclerView = view.findViewById(R.id.dongtai_RecyclerView);
-        DongtaiAdapter adapter = new DongtaiAdapter(view.getContext(),mUserID,mUserPortrait,mUserNickName,mDongtaiWord,mDongtaiImage,mDongtaiTime);
-        recyclerView.setAdapter(adapter);
-        recyclerView.setLinearLayout();;
-        recyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
-            @Override
-            public void onRefresh() {
-
-                Log.d(TAG, "onRefresh: start");
-                recyclerView.setPullLoadMoreCompleted();
-            }
-
-            @Override
-            public void onLoadMore() {
-
-                Log.d(TAG, "onLoadMore: start");
-                recyclerView.setPullLoadMoreCompleted();
-            }
-        });
+//        final PullLoadMoreRecyclerView recyclerView = view.findViewById(R.id.dongtai_RecyclerView);
+//        DongtaiAdapter adapter = new DongtaiAdapter(view.getContext(),mUserID,mUserPortrait,mUserNickName,mDongtaiWord,mDongtaiImage,mDongtaiTime);
+//        recyclerView.setAdapter(adapter);
+//        recyclerView.setLinearLayout();;
+//        recyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
+//            @Override
+//            public void onRefresh() {
+//
+//                Log.d(TAG, "onRefresh: start");
+//                recyclerView.setPullLoadMoreCompleted();
+//            }
+//
+//            @Override
+//            public void onLoadMore() {
+//
+//                Log.d(TAG, "onLoadMore: start");
+//                recyclerView.setPullLoadMoreCompleted();
+//            }
+//        });
     }
 
     //网络数据部分

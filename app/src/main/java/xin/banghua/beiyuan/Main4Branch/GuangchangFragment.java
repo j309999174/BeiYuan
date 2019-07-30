@@ -29,6 +29,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import androidx.navigation.Navigation;
@@ -38,6 +39,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import xin.banghua.beiyuan.Adapter.DongtaiAdapter;
+import xin.banghua.beiyuan.Adapter.DongtaiList;
 import xin.banghua.beiyuan.ParseJSON.ParseJSONArray;
 import xin.banghua.beiyuan.R;
 import xin.banghua.beiyuan.SharedPreferences.SharedHelper;
@@ -55,13 +57,8 @@ public class GuangchangFragment extends Fragment implements BaseSliderView.OnSli
     private View mView;
 
     private SliderLayout mDemoSlider;
-    //vars
-    private ArrayList<String> mUserID = new ArrayList<>();
-    private ArrayList<String> mUserPortrait = new ArrayList<>();
-    private ArrayList<String> mUserNickName = new ArrayList<>();
-    private ArrayList<String> mDongtaiWord = new ArrayList<>();
-    private ArrayList<String> mDongtaiImage = new ArrayList<>();
-    private ArrayList<String> mDongtaiTime = new ArrayList<>();
+    //var
+    private List<DongtaiList> dongtaiLists = new ArrayList<>();
 
     public GuangchangFragment() {
         // Required empty public constructor
@@ -176,12 +173,8 @@ public class GuangchangFragment extends Fragment implements BaseSliderView.OnSli
         if (jsonArray.length()>0){
             for (int i=0;i<jsonArray.length();i++){
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                mUserID.add(jsonObject.getString("myid"));
-                mUserPortrait.add(jsonObject.getString("myportrait"));
-                mUserNickName.add(jsonObject.getString("mynickname"));
-                mDongtaiWord.add(jsonObject.getString("context"));
-                mDongtaiImage.add(jsonObject.getString("picture"));
-                mDongtaiTime.add(jsonObject.getString("time"));
+                DongtaiList dongtaiList = new DongtaiList(jsonObject.getString("id"),jsonObject.getString("myid"),jsonObject.getString("mynickname"),jsonObject.getString("myportrait"),jsonObject.getString("context"),jsonObject.getString("picture"),jsonObject.getString("video"),jsonObject.getString("share"),jsonObject.getString("like"),jsonObject.getString("time"));
+                dongtaiLists.add(dongtaiList);
             }
         }
         initRecyclerView(view);
@@ -192,7 +185,7 @@ public class GuangchangFragment extends Fragment implements BaseSliderView.OnSli
         Log.d(TAG, "initRecyclerView: init recyclerview");
 
         final PullLoadMoreRecyclerView recyclerView = view.findViewById(R.id.dongtai_RecyclerView);
-        DongtaiAdapter adapter = new DongtaiAdapter(view.getContext(),mUserID,mUserPortrait,mUserNickName,mDongtaiWord,mDongtaiImage,mDongtaiTime);
+        DongtaiAdapter adapter = new DongtaiAdapter(view.getContext(),dongtaiLists);
         recyclerView.setAdapter(adapter);
         recyclerView.setLinearLayout();;
         recyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {

@@ -91,7 +91,7 @@ public class MeFragment extends Fragment {
         setting_btn = view.findViewById(R.id.setting_btn);
 
         SharedHelper shuserinfo = new SharedHelper(getActivity().getApplicationContext());
-        String myid = shuserinfo.readUserInfo().get("userID");
+        final String myid = shuserinfo.readUserInfo().get("userID");
         String mynickname = shuserinfo.readUserInfo().get("userNickName");
         String myportrait = shuserinfo.readUserInfo().get("userPortrait");
 
@@ -102,6 +102,8 @@ public class MeFragment extends Fragment {
         usernickname_tv.setText(mynickname);
 
 
+        beiyuanid_btn.setText("贝缘号："+myid);
+        personalinfo_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.me_reset_action));
         setting_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.me_setting_action));
         xiangce_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +123,7 @@ public class MeFragment extends Fragment {
         tuiguangma_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "您的推广码是：5", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext, "您的推广码是："+myid, Toast.LENGTH_LONG).show();
             }
         });
         jifen_btn.setOnClickListener(new View.OnClickListener() {

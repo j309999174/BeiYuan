@@ -14,6 +14,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -47,6 +49,8 @@ public class ResetActivity extends AppCompatActivity {
     EditText value_et;
     TextView title_tv;
     CircleImageView portrait;
+    RadioGroup userGender;
+    RadioGroup userProperty;
 
     String title,userPortrait,value;
     @Override
@@ -63,6 +67,10 @@ public class ResetActivity extends AppCompatActivity {
         title_tv = findViewById(R.id.title_tv);
         title_tv.setText(title);
         portrait = findViewById(R.id.portrait);
+        userGender = findViewById(R.id.userGender);
+        userProperty = findViewById(R.id.userProperty);
+
+
 
         if (title.equals("头像设置")){
             SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
@@ -73,6 +81,14 @@ public class ResetActivity extends AppCompatActivity {
                     .asBitmap()
                     .load(myportrait)
                     .into(portrait);
+        }
+        if (title.equals("性别设置")){
+            value_et.setVisibility(View.GONE);
+            userGender.setVisibility(View.VISIBLE);
+        }
+        if (title.equals("属性设置")){
+            value_et.setVisibility(View.GONE);
+            userProperty.setVisibility(View.VISIBLE);
         }
 
         portrait.setOnClickListener(new View.OnClickListener() {
@@ -93,11 +109,21 @@ public class ResetActivity extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (title.equals("头像设置")){
-                    setUserPortrait("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat");
-                }else {
-                    submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat");
+                switch (title){
+                    case "头像设置":
+                        setUserPortrait("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat");
+                        break;
+                    case "性别设置":
+                        submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat","性别");
+                        break;
+                    case "属性设置":
+                        submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat","属性");
+                        break;
+                    default:
+                        submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat","其他");
+                        break;
                 }
+
 
             }
         });
@@ -140,15 +166,25 @@ public class ResetActivity extends AppCompatActivity {
             startActivity(intent);
         }
     };
-    //TODO okhttp设置手机，密码，邮箱,昵称
-    public void submitValue(final String url){
+    //TODO okhttp设置手机，密码，邮箱,昵称,年龄，地区。
+    public void submitValue(final String url, final String type){
         new Thread(new Runnable() {
             @Override
             public void run(){
                 SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
                 String myid = shuserinfo.readUserInfo().get("userID");
 
-                value = value_et.getText().toString();
+                switch (type){
+                    case "性别":
+                        value = ((RadioButton) findViewById(userGender.getCheckedRadioButtonId())).getText().toString();
+                    break;
+                    case "属性":
+                        value = ((RadioButton) findViewById(userProperty.getCheckedRadioButtonId())).getText().toString();
+                        break;
+                    default:
+                        value = value_et.getText().toString();
+                        break;
+                }
 
                 OkHttpClient client = new OkHttpClient();
                 RequestBody formBody = new FormBody.Builder()

@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.SearchView;
 
 import androidx.navigation.Navigation;
 import xin.banghua.beiyuan.R;
@@ -84,6 +85,23 @@ public class SousuoFragment extends Fragment {
         //会直接运行getDirectBundle，所以没法动态传值
         //direct_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.sousuo_result_action,getDirectBundle()));
         //condition_btn.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.sousuo_result_action,getConditionBundle(view)));
+        SearchView searchView = view.findViewById(R.id.direct_sv);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Bundle bundle = new Bundle();
+                bundle.putString("type","direct");
+                bundle.putString("nameOrPhone",query);
+                Navigation.findNavController(view).navigate(R.id.sousuo_result_action, bundle);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                return false;
+            }
+        });
         direct_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
