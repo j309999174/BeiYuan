@@ -27,6 +27,7 @@
             android:layout_toRightOf="@id/userportrait_iv"
             android:text="TextView"
             android:textAlignment="viewStart"
+            android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -39,7 +40,8 @@
             android:layout_marginLeft="60dp"
             android:layout_marginTop="70dp"
             android:layout_toRightOf="@id/userportrait_iv"
-            android:text="贝缘号" />
+            android:text="贝缘号"
+            android:textColor="@color/design_default_color_primary_dark" />
 
         <Button
             android:id="@+id/personalinfo_btn"
@@ -49,7 +51,8 @@
             android:layout_marginLeft="160dp"
             android:layout_marginTop="70dp"
             android:layout_toRightOf="@id/userportrait_iv"
-            android:text="个人资料" />
+            android:text="个人资料"
+            android:textColor="@color/design_default_color_primary_dark" />
 
         <TableLayout
             android:layout_width="match_parent"

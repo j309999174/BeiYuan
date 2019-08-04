@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import net.alhazmy13.mediapicker.Image.ImagePicker;
 
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.ListIterator;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -44,7 +46,7 @@ public class Userset extends AppCompatActivity {
     String logtype,userAccount,userPassword,userNickname,userAge,userRegion,userGender,userProperty,userPortrait,userSignature,referral;
     Button submit_btn;
     //
-    ImageView userPortrait_iv;
+    CircleImageView userPortrait_iv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +69,6 @@ public class Userset extends AppCompatActivity {
         dProperty_rb = findViewById(R.id.dProperty);
         submit_btn = findViewById(R.id.submit_btn);
         userPortrait_iv = findViewById(R.id.authportrait);
-        userPortrait_iv.setImageResource(R.drawable.plus);
         userSignature_et = findViewById(R.id.userSignature);
         referral_et = findViewById(R.id.referral_et);
 
@@ -99,13 +100,30 @@ public class Userset extends AppCompatActivity {
         submit_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (userPortrait.equals("")){
+                    Toast.makeText(mContext, "请设置头像", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 userNickname = userNickname_et.getText().toString();
+                if (userNickname.equals("")){
+                    Toast.makeText(mContext, "请输入昵称", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 userAge = userAge_et.getText().toString();
+                if (userAge.equals("")){
+                    Toast.makeText(mContext, "请输入年龄", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 userRegion = userRegion_et.getText().toString();
+                if (userRegion.equals("")){
+                    Toast.makeText(mContext, "请输入地区", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 userSignature = userSignature_et.getText().toString();
                 userGender = ((RadioButton) findViewById(userGender_rg.getCheckedRadioButtonId())).getText().toString();
                 userProperty = ((RadioButton) findViewById(userProperty_rg.getCheckedRadioButtonId())).getText().toString();
                 referral = referral_et.getText().toString();
+
 
                 if (logtype.equals("1")){
                     postSignUp("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signup&m=socialchat");
@@ -122,13 +140,14 @@ public class Userset extends AppCompatActivity {
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             Log.d("进入handler", "handler");
-                if (msg.arg1==1) {
+                if (msg.obj.toString().equals("手机号已存在")) {
+                    Toast.makeText(mContext, "手机号已存在", Toast.LENGTH_LONG).show();
+                }else {
                     Log.d("跳转", "intent");
-
+                    Toast.makeText(mContext, "注册成功", Toast.LENGTH_LONG).show();
                     Intent intent = new Intent(Userset.this, MainActivity.class);
                     startActivity(intent);
                 }
-
         }
     };
 
@@ -169,7 +188,8 @@ public class Userset extends AppCompatActivity {
                     //格式：{"error":"0","info":"登陆成功"}
                     Message message=handler.obtainMessage();
                     message.arg1=1;
-                    Log.d("用户信息",userAccount+"/"+userPassword+"/"+userNickname+"/"+userAge+"/"+userRegion+"/"+userGender+"/"+userProperty);
+                    message.obj=response.body().string();
+                    Log.d("用户信息", message.obj.toString());
                     handler.sendMessageDelayed(message,10);
                 }catch (Exception e) {
                     e.printStackTrace();

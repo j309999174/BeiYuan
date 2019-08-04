@@ -1,19 +1,17 @@
 package xin.banghua.beiyuan.Signin;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -22,12 +20,12 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import xin.banghua.beiyuan.MainActivity;
 import xin.banghua.beiyuan.R;
 
 import static io.rong.imkit.fragment.ConversationFragment.TAG;
 
-public class SignupActivity extends Activity {
+public class FindPasswordActivity extends AppCompatActivity {
+
     private Context mContext;
     //账号密码输入框
     EditText userAccount;
@@ -45,7 +43,7 @@ public class SignupActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
+        setContentView(R.layout.activity_find_password);
         userAccount = findViewById(R.id.userAccount);
         userPassword = findViewById(R.id.userPassword);
         verificationCode = findViewById(R.id.verificationCode);
@@ -92,13 +90,18 @@ public class SignupActivity extends Activity {
 
 
 
-//处理返回的数据
+    //处理返回的数据
     @SuppressLint("HandlerLeak")
     private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
             super.handleMessage(msg);
             switch (msg.what){
+                case 1:
+                    Toast.makeText(mContext, "密码修改成功", Toast.LENGTH_LONG).show();
+                    Intent intent = new Intent(FindPasswordActivity.this, SigninActivity.class);
+                    startActivity(intent);
+                    break;
                 case 2:
                     Toast.makeText(mContext, "验证码发送成功", Toast.LENGTH_LONG).show();
                     smscode = msg.obj.toString();
@@ -118,18 +121,14 @@ public class SignupActivity extends Activity {
     };
     //TODO okhttp验证信息
     public void verificationCode(final String verificationCodeString){
-                if (smscode.equals(verificationCodeString)){
-                    Intent intent = new Intent(SignupActivity.this, Userset.class);
-                    intent.putExtra("logtype","1");
-                    intent.putExtra("userAccount",userAcountString);
-                    intent.putExtra("userPassword",userPasswordString);
-                    startActivity(intent);
-                }else {
-                    Toast.makeText(mContext, "验证码错误", Toast.LENGTH_LONG).show();
-                }
+        if (smscode.equals(verificationCodeString)){
+            findPassword("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=findpassword&m=socialchat",userAcountString,userPasswordString);
+        }else {
+            Toast.makeText(mContext, "验证码错误", Toast.LENGTH_LONG).show();
+        }
     }
 
-    //TODO okhttp获取用户信息
+    //TODO okhttp发送验证码
     public void sendCode(final String url,final String phoneNumber){
         new Thread(new Runnable() {
             @Override
@@ -149,7 +148,7 @@ public class SignupActivity extends Activity {
                     Message message=handler.obtainMessage();
                     message.obj=response.body().string();
                     message.what=2;
-                    Log.d(TAG, "run: Userinfo发送的值"+message.obj.toString());
+                    Log.d(TAG, "run: sendCode发送的值"+message.obj.toString());
                     handler.sendMessageDelayed(message,10);
                 }catch (Exception e) {
                     e.printStackTrace();
@@ -177,6 +176,36 @@ public class SignupActivity extends Activity {
                     }
                 }
 
+            }
+        }).start();
+    }
+
+    //TODO okhttp修改密码
+    public void findPassword(final String url,final String userPhone,final String userPassword){
+        new Thread(new Runnable() {
+            @Override
+            public void run(){
+                OkHttpClient client = new OkHttpClient();
+                RequestBody formBody = new FormBody.Builder()
+                        .add("userPhone", userPhone)
+                        .add("userPassword", userPassword)
+                        .build();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(formBody)
+                        .build();
+
+                try (Response response = client.newCall(request).execute()) {
+                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                    Message message=handler.obtainMessage();
+                    message.obj=response.body().string();
+                    message.what=1;
+                    Log.d(TAG, "run: findPassword发送的值"+message.obj.toString());
+                    handler.sendMessageDelayed(message,10);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }).start();
     }

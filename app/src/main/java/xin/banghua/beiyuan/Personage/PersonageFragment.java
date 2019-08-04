@@ -195,6 +195,7 @@ public class PersonageFragment extends Fragment {
 
     //TODO 添加好友
     public void makeFriend(final String url){
+        Toast.makeText(mContext, "申请成功", Toast.LENGTH_LONG).show();
         new Thread(new Runnable() {
             @Override
             public void run(){

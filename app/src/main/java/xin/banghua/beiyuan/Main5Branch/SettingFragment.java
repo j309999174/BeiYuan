@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import xin.banghua.beiyuan.R;
 import xin.banghua.beiyuan.Signin.SigninActivity;
@@ -89,7 +90,7 @@ public class SettingFragment extends Fragment {
         private_set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,ResetActivity.class);
+                Intent intent = new Intent(mContext,PrivateSettingActivity.class);
                 intent.putExtra("title","隐私设置");
                 startActivity(intent);
             }
@@ -97,7 +98,7 @@ public class SettingFragment extends Fragment {
         common_set.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,ResetActivity.class);
+                Intent intent = new Intent(mContext,CommonSettingActivity.class);
                 intent.putExtra("title","通用设置");
                 startActivity(intent);
             }
@@ -113,17 +114,13 @@ public class SettingFragment extends Fragment {
         help_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,ResetActivity.class);
-                intent.putExtra("title","帮助中心");
-                startActivity(intent);
+                Toast.makeText(mContext, "功能维护中", Toast.LENGTH_LONG).show();
             }
         });
         version_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext,ResetActivity.class);
-                intent.putExtra("title","版本查询");
-                startActivity(intent);
+                Toast.makeText(mContext, "当前版本：1.0.0", Toast.LENGTH_LONG).show();
             }
         });
 

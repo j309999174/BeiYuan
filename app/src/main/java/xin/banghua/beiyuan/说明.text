@@ -1,4 +1,39 @@
-常用：
+常用：https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=tuijian&m=socialchat
+<View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#555555"
+            android:padding="3dp"
+            android:layout_marginTop="60dp"/>
+
+Intent intent = new Intent(SignupActivity.this, Userset.class);
+intent.putExtra("logtype","1");
+startActivity(intent);
+
+ Toast.makeText(this, "请输入账号密码", Toast.LENGTH_LONG).show();
+
+返回按钮
+<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <ImageView
+            android:id="@+id/iv_back_left"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginLeft="16dp"
+            android:contentDescription="TODO"
+            android:src="@mipmap/item_left_back_btn"
+            android:visibility="visible"
+            android:layout_margin="10dp"/>
+    </LinearLayout>
+            ImageView back_btn = findViewById(R.id.iv_back_left);
+            back_btn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    finish();
+                }
+            });
 网络图片:
 *Glide.with(mContext)
      .asBitmap()
@@ -33,6 +68,7 @@ String myportrait = shuserinfo.readUserInfo().get("userPortrait");
 2.网络操作
 //网络数据部分
 //处理返回的数据
+@SuppressLint("HandlerLeak")
  private Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {

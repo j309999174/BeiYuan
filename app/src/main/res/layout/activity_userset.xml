@@ -21,11 +21,11 @@
             android:layout_height="match_parent"
             android:gravity="center">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/authportrait"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                tools:srcCompat="@mipmap/ic_launcher" />
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/plus" />
         </TableRow>
 
         <TableRow
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="年龄"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
         </TableRow>
 
         <TableRow
@@ -160,7 +160,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="推荐码（选填）"
-                android:inputType="textPersonName" />
+                android:inputType="number" />
         </TableRow>
 
         <TableRow
@@ -173,6 +173,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="提交"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="@dimen/rc_conversation_item_data_size" />
         </TableRow>
     </TableLayout>

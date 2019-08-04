@@ -75,7 +75,7 @@ public class FujinFragment extends Fragment implements BaseSliderView.OnSliderCl
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mView = inflater.inflate(R.layout.fragment_tuijian, container, false);
+        mView = inflater.inflate(R.layout.fragment_fujin, container, false);
         return mView;
     }
 

@@ -16,6 +16,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ToggleButton;
 
 import com.daimajia.slider.library.Animations.DescriptionAnimation;
 import com.daimajia.slider.library.SliderLayout;
@@ -48,11 +49,13 @@ import xin.banghua.beiyuan.ParseJSON.ParseJSONArray;
 import xin.banghua.beiyuan.R;
 import xin.banghua.beiyuan.SharedPreferences.SharedHelper;
 
+import static xin.banghua.beiyuan.R.color.colorPrimary;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener {
+public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderClickListener, ViewPagerEx.OnPageChangeListener{
     private static final String TAG = "LuntanFragment";
 
     //公告
@@ -65,16 +68,14 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
     private LuntanAdapter adapter;
 
     //二级菜单
-    Button button1;
-    Button button2;
-    Button button3;
-    Button button4;
-    Button button5;
+    ToggleButton toggleButton1,toggleButton2,toggleButton3,toggleButton4,toggleButton5;
 
     private View mView;
     public LuntanFragment() {
         // Required empty public constructor
     }
+
+
 
 
     @Override
@@ -113,46 +114,66 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
 
     //二级菜单
     private void initSubnavigationButton(View view){
-        button1 = view.findViewById(R.id.button1);
-        button1.setOnClickListener(new View.OnClickListener() {
+        toggleButton1 = view.findViewById(R.id.toggleButton1);
+        toggleButton1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toggleButton2.setChecked(false);
+                toggleButton3.setChecked(false);
+                toggleButton4.setChecked(false);
+                toggleButton5.setChecked(false);
                 getDataGonggao("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat");
                 getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","首页");
                 getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","首页");
             }
         });
-        button2 = view.findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
+        toggleButton2 = view.findViewById(R.id.toggleButton2);
+        toggleButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toggleButton1.setChecked(false);
+                toggleButton3.setChecked(false);
+                toggleButton4.setChecked(false);
+                toggleButton5.setChecked(false);
                 marqueeTv.setVisibility(View.GONE);
                 getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","自拍");
                 getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","自拍");
             }
         });
-        button3 = view.findViewById(R.id.button3);
-        button3.setOnClickListener(new View.OnClickListener() {
+        toggleButton3 = view.findViewById(R.id.toggleButton3);
+        toggleButton3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toggleButton1.setChecked(false);
+                toggleButton2.setChecked(false);
+                toggleButton4.setChecked(false);
+                toggleButton5.setChecked(false);
                 marqueeTv.setVisibility(View.GONE);
                 getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","真实");
                 getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","真实");
             }
         });
-        button4 = view.findViewById(R.id.button4);
-        button4.setOnClickListener(new View.OnClickListener() {
+        toggleButton4 = view.findViewById(R.id.toggleButton4);
+        toggleButton4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toggleButton1.setChecked(false);
+                toggleButton2.setChecked(false);
+                toggleButton3.setChecked(false);
+                toggleButton5.setChecked(false);
                 marqueeTv.setVisibility(View.GONE);
                 getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","情感");
                 getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","情感");
             }
         });
-        button5 = view.findViewById(R.id.button5);
-        button5.setOnClickListener(new View.OnClickListener() {
+        toggleButton5 = view.findViewById(R.id.toggleButton5);
+        toggleButton5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                toggleButton1.setChecked(false);
+                toggleButton2.setChecked(false);
+                toggleButton3.setChecked(false);
+                toggleButton4.setChecked(false);
                 marqueeTv.setVisibility(View.GONE);
                 getDataSlider("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","大圈");
                 getDataPostlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=luntan&m=socialchat","大圈");
@@ -265,20 +286,23 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
         recyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
             @Override
             public void onRefresh() {
-
-                Log.d(TAG, "onRefresh: start");
-                marqueeTv.setVisibility(View.VISIBLE);
-                mDemoSlider.setVisibility(View.VISIBLE);
+                Log.d(TAG, "onLoadMore: start");
+                marqueeTv.setVisibility(View.GONE);
+                mDemoSlider.setVisibility(View.GONE);
                 recyclerView.setPullLoadMoreCompleted();
+//                Log.d(TAG, "onRefresh: start");
+//                marqueeTv.setVisibility(View.VISIBLE);
+//                mDemoSlider.setVisibility(View.VISIBLE);
+//                recyclerView.setPullLoadMoreCompleted();
             }
 
             @Override
             public void onLoadMore() {
 
-                Log.d(TAG, "onLoadMore: start");
-                marqueeTv.setVisibility(View.GONE);
-                mDemoSlider.setVisibility(View.GONE);
-                recyclerView.setPullLoadMoreCompleted();
+//                Log.d(TAG, "onLoadMore: start");
+//                marqueeTv.setVisibility(View.GONE);
+//                mDemoSlider.setVisibility(View.GONE);
+                  recyclerView.setPullLoadMoreCompleted();
             }
 
         });

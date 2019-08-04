@@ -135,7 +135,8 @@ public class MeFragment extends Fragment {
         openvip_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, "功能维护中", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(getActivity(),BuyvipActivity.class);
+                startActivity(intent);
             }
         });
     }

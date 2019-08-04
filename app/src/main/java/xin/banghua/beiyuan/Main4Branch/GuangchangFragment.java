@@ -191,18 +191,20 @@ public class GuangchangFragment extends Fragment implements BaseSliderView.OnSli
         recyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
             @Override
             public void onRefresh() {
-
-                mDemoSlider.setVisibility(View.VISIBLE);
-                Log.d(TAG, "onRefresh: start");
+                mDemoSlider.setVisibility(View.GONE);
+                Log.d(TAG, "onLoadMore: start");
                 recyclerView.setPullLoadMoreCompleted();
+//                mDemoSlider.setVisibility(View.VISIBLE);
+//                Log.d(TAG, "onRefresh: start");
+//                recyclerView.setPullLoadMoreCompleted();
             }
 
             @Override
             public void onLoadMore() {
 
-                mDemoSlider.setVisibility(View.GONE);
-                Log.d(TAG, "onLoadMore: start");
-                recyclerView.setPullLoadMoreCompleted();
+//                mDemoSlider.setVisibility(View.GONE);
+//                Log.d(TAG, "onLoadMore: start");
+                  recyclerView.setPullLoadMoreCompleted();
             }
         });
     }

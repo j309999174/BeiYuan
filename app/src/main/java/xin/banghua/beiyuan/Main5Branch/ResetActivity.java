@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -119,11 +120,14 @@ public class ResetActivity extends AppCompatActivity {
                     case "属性设置":
                         submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat","属性");
                         break;
+                    case "意见反馈":
+                        submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=feedback&m=socialchat","意见");
+                        break;
                     default:
                         submitValue("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=reset&m=socialchat","其他");
                         break;
                 }
-
+                Toast.makeText(v.getContext(), "提交成功", Toast.LENGTH_LONG).show();
 
             }
         });
@@ -173,25 +177,47 @@ public class ResetActivity extends AppCompatActivity {
             public void run(){
                 SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
                 String myid = shuserinfo.readUserInfo().get("userID");
-
+                String mynickname = shuserinfo.readUserInfo().get("userNickName");
+                String myportrait = shuserinfo.readUserInfo().get("userPortrait");
+                OkHttpClient client = new OkHttpClient();
+                RequestBody formBody;
                 switch (type){
                     case "性别":
                         value = ((RadioButton) findViewById(userGender.getCheckedRadioButtonId())).getText().toString();
+                         formBody = new FormBody.Builder()
+                                .add("type",title)
+                                .add("userID", myid)
+                                .add("value",value)
+                                .build();
                     break;
                     case "属性":
                         value = ((RadioButton) findViewById(userProperty.getCheckedRadioButtonId())).getText().toString();
+                         formBody = new FormBody.Builder()
+                                .add("type",title)
+                                .add("userID", myid)
+                                .add("value",value)
+                                .build();
+                        break;
+                    case "意见":
+                        value = value_et.getText().toString();
+                        formBody = new FormBody.Builder()
+                                .add("type",title)
+                                .add("userID", myid)
+                                .add("nickname", mynickname)
+                                .add("portrait", myportrait)
+                                .add("content",value)
+                                .build();
                         break;
                     default:
                         value = value_et.getText().toString();
+                         formBody = new FormBody.Builder()
+                                .add("type",title)
+                                .add("userID", myid)
+                                .add("value",value)
+                                .build();
                         break;
                 }
 
-                OkHttpClient client = new OkHttpClient();
-                RequestBody formBody = new FormBody.Builder()
-                        .add("type",title)
-                        .add("userID", myid)
-                        .add("value",value)
-                        .build();
                 Request request = new Request.Builder()
                         .url(url)
                         .post(formBody)

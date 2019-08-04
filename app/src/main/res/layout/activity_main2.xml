@@ -38,7 +38,8 @@
                 android:id="@+id/new_friend"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+新朋友" />
+                android:text="+新朋友"
+                android:textColor="@color/colorPrimaryDark" />
         </TableRow>
 
         <TableRow

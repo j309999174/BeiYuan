@@ -56,6 +56,14 @@ public class SigninActivity extends Activity {
 
         signIn = (Button) findViewById(R.id.signin_btn);
         signUp = (Button) findViewById(R.id.signup_btn);
+        findPassword = findViewById(R.id.findPassword_btn);
+        findPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SigninActivity.this,FindPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
         findPassword = (Button) findViewById(R.id.findPassword_btn);
 
 
@@ -73,7 +81,7 @@ public class SigninActivity extends Activity {
             public void onClick(View v) {
                 userAccount = (EditText) findViewById(R.id.userAccount);
                 userPassword = (EditText) findViewById(R.id.userPassword);
-                if(userAccount.getText().toString()==""||userPassword.getText().toString()==""){
+                if(userAccount.getText().toString().equals("")||userPassword.getText().toString().equals("")){
                     Toast.makeText(mContext, "请输入账号密码", Toast.LENGTH_LONG).show();
                 }else{
                     postSignIn("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signin&m=socialchat",userAccount.getText().toString(),userPassword.getText().toString());
@@ -96,7 +104,7 @@ public class SigninActivity extends Activity {
                         if (object.getString("error").equals("0")){
                             //通知
                             Log.d("发送通知",object.getString("info"));
-                            Toast.makeText(mContext,object.getString("info"),Toast.LENGTH_LONG);
+                            Toast.makeText(mContext,object.getString("info"),Toast.LENGTH_LONG).show();
                             //保存用户数据
                             Log.d("保存用户数据",object.getString("userID"));
                             mContext = getApplicationContext();
@@ -106,6 +114,9 @@ public class SigninActivity extends Activity {
 
                             postRongyunUserRegister("https://rongyun.banghua.xin/RongCloud/example/User/userregister.php",object.getString("userID"),object.getString("userNickName"),object.getString("userPortrait"));
 
+                        }else {
+                            Log.d(TAG, "handleMessage: test");
+                            Toast.makeText(SigninActivity.this,"账号或密码错误",Toast.LENGTH_LONG).show();
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

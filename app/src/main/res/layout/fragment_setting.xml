@@ -21,7 +21,8 @@
                 android:layout_height="wrap_content"
                 android:text="设置"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
         </TableRow>
 
         <TableRow
@@ -119,11 +120,11 @@
 
             <Button
                 android:id="@+id/logout_btn"
+                style="@style/Base.Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@color/rc_ext_sub_menu_item_text_color"
                 android:text="退出登录"
-                android:textColor="@color/rc_ad_file_list_select_file_text_state" />
+                android:textColor="@color/colorPrimaryDark" />
         </TableRow>
 
     </TableLayout>
