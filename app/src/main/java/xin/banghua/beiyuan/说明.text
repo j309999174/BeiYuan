@@ -134,7 +134,10 @@ String myportrait = shuserinfo.readUserInfo().get("userPortrait");
     }
 
 3.json读取
-JSONObject jsonObject = new ParseJSONObject(msg.obj.toString()).getParseJSON();
+JSONObject jsonObject = new JSONObject(msg.obj.toString());//原生的
+jsonObject.getString("userid");
+
+JSONObject jsonObject = new ParseJSONObject(msg.obj.toString()).getParseJSON();//自定义的
 jsonObject.getString("userid");
 
 JSONArray jsonArray = new ParseJSONArray(msg.obj.toString()).getParseJSON();

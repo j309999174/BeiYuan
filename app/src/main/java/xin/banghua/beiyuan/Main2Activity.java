@@ -87,6 +87,13 @@ public class Main2Activity extends AppCompatActivity implements RongIM.UserInfoP
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        //设置融云当前用户信息
+        SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
+        String myid = shuserinfo.readUserInfo().get("userID");
+        String mynickname = shuserinfo.readUserInfo().get("userNickName");
+        String myportrait = shuserinfo.readUserInfo().get("userPortrait");
+        UserInfo myinfo = new UserInfo(myid,mynickname, Uri.parse(myportrait));
+        RongIM.getInstance().setCurrentUserInfo(myinfo);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -219,13 +226,13 @@ public class Main2Activity extends AppCompatActivity implements RongIM.UserInfoP
 
     @Override
     public UserInfo getUserInfo(String s) {
-        //自己的头像也是在列表中选取，所以需要加入自己的信息
-        SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
-        String myid = shuserinfo.readUserInfo().get("userID");
-        String mynickname = shuserinfo.readUserInfo().get("userNickName");
-        String myportrait = shuserinfo.readUserInfo().get("userPortrait");
-        FriendList me = new FriendList(myid,myportrait,mynickname);
-        friendList.add(me);
+        //自己的头像也是在列表中选取，所以需要加入自己的信息。。。有自己好友，应该设置当前用户信息
+//        SharedHelper shuserinfo = new SharedHelper(getApplicationContext());
+//        String myid = shuserinfo.readUserInfo().get("userID");
+//        String mynickname = shuserinfo.readUserInfo().get("userNickName");
+//        String myportrait = shuserinfo.readUserInfo().get("userPortrait");
+//        FriendList me = new FriendList(myid,myportrait,mynickname);
+//        friendList.add(me);
         //获取用户信息
         for (FriendList i:friendList){
             if (i.getmUserID().equals(s)){

@@ -21,6 +21,9 @@ import android.widget.Toast;
 import com.alipay.sdk.app.EnvUtils;
 import com.alipay.sdk.app.PayTask;
 import com.bumptech.glide.Glide;
+import com.tencent.mm.opensdk.modelpay.PayReq;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -44,6 +47,14 @@ import xin.banghua.beiyuan.SharedPreferences.SharedHelper;
 public class BuyvipAdapter extends RecyclerView.Adapter<BuyvipAdapter.ViewHolder>  {
 
     private static final String TAG = "BuyvipAdapter";
+    // APP_ID 替换为你的应用从官方网站申请到的合法appID
+    private static final String APP_ID = "wxc7ff179d403b7a51";
+
+    // IWXAPI 是第三方app和微信通信的openApi接口
+    private IWXAPI api;
+
+    Button button,button1;
+
 
     private List<BuyvipList> buyvipLists;
 
@@ -53,7 +64,6 @@ public class BuyvipAdapter extends RecyclerView.Adapter<BuyvipAdapter.ViewHolder
     private String orderInfo;
 
     public BuyvipAdapter(Activity mContext, List<BuyvipList> buyvipLists) {
-
         this.mContext = mContext;
         this.buyvipLists = buyvipLists;
     }
@@ -78,7 +88,7 @@ public class BuyvipAdapter extends RecyclerView.Adapter<BuyvipAdapter.ViewHolder
         viewHolder.weixin_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                weixinorder("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=addorder&m=socialchat",currentItem.getVipid());
+                getUnifiedorder("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=payunifiedorder&m=socialchat",currentItem.getVipid());
             }
         });
         viewHolder.alipay_btn.setOnClickListener(new View.OnClickListener() {
@@ -128,7 +138,26 @@ public class BuyvipAdapter extends RecyclerView.Adapter<BuyvipAdapter.ViewHolder
             //1是支付宝支付
             switch (msg.what){
                 case 1:
-                    weixin("https://www.banghua.xin/alipay-sdk-PHP/alipay.php",msg.obj.toString());
+                    JSONObject jsonObject = null;//原生的
+                    try {
+                        jsonObject = new JSONObject(msg.obj.toString());
+                        Log.d(TAG, "handleMessage: "+jsonObject.getString("prepay_id")+";"+jsonObject.getString("sign"));
+
+                        PayReq request = new PayReq();
+                        request.appId = jsonObject.getString("appid");
+                        request.partnerId = jsonObject.getString("mch_id");
+                        request.prepayId= jsonObject.getString("prepay_id");
+                        request.packageValue = "Sign=WXPay";
+                        request.nonceStr= jsonObject.getString("nonce_str");
+                        request.timeStamp= jsonObject.getString("timeStamp");
+                        request.sign= jsonObject.getString("sign");
+                        api = WXAPIFactory.createWXAPI(mContext, APP_ID, true);
+                        // 将应用的appId注册到微信
+                        api.registerApp(APP_ID);
+                        api.sendReq(request);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                     break;
                 case 2:
                     Log.d(TAG, "handleMessage: 进入2");
@@ -148,8 +177,8 @@ public class BuyvipAdapter extends RecyclerView.Adapter<BuyvipAdapter.ViewHolder
                     break;
                 case 6:
                     try {
-                        JSONObject jsonObject = new JSONObject(msg.obj.toString());
-                        if (jsonObject.getString("code")=="9000")
+                        JSONObject jsonObject1 = new JSONObject(msg.obj.toString());
+                        if (jsonObject1.getString("code")=="9000")
                             Toast.makeText(mContext, "支付成功", Toast.LENGTH_LONG).show();
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -179,39 +208,7 @@ public class BuyvipAdapter extends RecyclerView.Adapter<BuyvipAdapter.ViewHolder
 
 
 
-    //TODO okhttp先生成订单
-    public void weixinorder(final String url,final String vipid){
-        new Thread(new Runnable() {
-            @Override
-            public void run(){
 
-                SharedHelper shuserinfo = new SharedHelper(mContext.getApplicationContext());
-                String userid = shuserinfo.readUserInfo().get("userID");
-
-                OkHttpClient client = new OkHttpClient();
-                RequestBody formBody = new FormBody.Builder()
-                        .add("vipid", vipid)
-                        .add("userid", userid)
-                        .build();
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(formBody)
-                        .build();
-
-                try (Response response = client.newCall(request).execute()) {
-                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-                    Message message=handler.obtainMessage();
-                    message.obj=response.body().string();
-                    message.what=1;
-                    Log.d(TAG, "run: Userinfo发送的值"+message.obj.toString());
-                    handler.sendMessageDelayed(message,10);
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
     //TODO okhttp先生成订单
     public void alipayorder(final String url,final String vipid){
         new Thread(new Runnable() {
@@ -245,37 +242,8 @@ public class BuyvipAdapter extends RecyclerView.Adapter<BuyvipAdapter.ViewHolder
             }
         }).start();
     }
-    //TODO okhttp先生成订单
-    public void weixin(final String url,final String orderid){
-        new Thread(new Runnable() {
-            @Override
-            public void run(){
 
-                OkHttpClient client = new OkHttpClient();
-                RequestBody formBody = new FormBody.Builder()
-                        .add("appname", "socialchat")
-                        .add("orderid", orderid)
-                        .build();
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(formBody)
-                        .build();
-
-                try (Response response = client.newCall(request).execute()) {
-                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-                    Message message=handler.obtainMessage();
-                    message.obj=response.body().string();
-                    message.what=3;
-                    Log.d(TAG, "run: Userinfo发送的值"+message.obj.toString());
-                    handler.sendMessageDelayed(message,10);
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-    //TODO okhttp先生成订单
+    //TODO okhttp支付
     public void alipay(final String url,final String orderid){
         new Thread(new Runnable() {
             @Override
@@ -298,6 +266,40 @@ public class BuyvipAdapter extends RecyclerView.Adapter<BuyvipAdapter.ViewHolder
                     Message message=handler.obtainMessage();
                     message.obj=response.body().string();
                     message.what=4;
+                    Log.d(TAG, "run: Userinfo发送的值"+message.obj.toString());
+                    handler.sendMessageDelayed(message,10);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+
+    //TODO okhttp微信支付，获取统一下单
+    public void getUnifiedorder(final String url,final String vipid){
+        new Thread(new Runnable() {
+            @Override
+            public void run(){
+                SharedHelper shuserinfo = new SharedHelper(mContext.getApplicationContext());
+                String userid = shuserinfo.readUserInfo().get("userID");
+
+                OkHttpClient client = new OkHttpClient();
+                RequestBody formBody = new FormBody.Builder()
+                        .add("userid", userid)
+                        .add("vipid", vipid)
+                        .build();
+                Request request = new Request.Builder()
+                        .url(url)
+                        .post(formBody)
+                        .build();
+
+                try (Response response = client.newCall(request).execute()) {
+                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+
+                    Message message=handler.obtainMessage();
+                    message.obj=response.body().string();
+                    message.what=1;
                     Log.d(TAG, "run: Userinfo发送的值"+message.obj.toString());
                     handler.sendMessageDelayed(message,10);
                 }catch (Exception e) {

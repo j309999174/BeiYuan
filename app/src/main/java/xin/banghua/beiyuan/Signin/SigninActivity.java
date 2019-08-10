@@ -1,9 +1,12 @@
 package xin.banghua.beiyuan.Signin;
 
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +15,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelmsg.SendAuth;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,20 +50,43 @@ public class SigninActivity extends Activity {
     EditText userPassword;
 
     //三个按钮
-    private Button signIn,signUp,findPassword;
+    private Button signIn,signUp,findPassword,wxLogin_btn;
 
     //okhttp
 
+    //微信
+    // APP_ID 替换为你的应用从官方网站申请到的合法appID
+    private static final String APP_ID = "wxc7ff179d403b7a51";
+    // IWXAPI 是第三方app和微信通信的openApi接口
+    private IWXAPI api;
+    private void regToWx() {
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
 
+        // 将应用的appId注册到微信
+        api.registerApp(APP_ID);
+
+        //建议动态监听微信启动广播进行注册到微信
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // 将该app注册到微信
+                api.registerApp(APP_ID);
+            }
+        }, new IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP));
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signin);
-
+        regToWx();
         mContext = this;
 
         signIn = (Button) findViewById(R.id.signin_btn);
         signUp = (Button) findViewById(R.id.signup_btn);
+        wxLogin_btn = findViewById(R.id.wxLogin_btn);
         findPassword = findViewById(R.id.findPassword_btn);
         findPassword.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +117,17 @@ public class SigninActivity extends Activity {
                 }else{
                     postSignIn("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=signin&m=socialchat",userAccount.getText().toString(),userPassword.getText().toString());
                 }
+            }
+        });
+
+
+        wxLogin_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SendAuth.Req req = new SendAuth.Req();
+                req.scope = "snsapi_userinfo";
+                req.state = "wechat_sdk_demo_test";
+                api.sendReq(req);
             }
         });
     }

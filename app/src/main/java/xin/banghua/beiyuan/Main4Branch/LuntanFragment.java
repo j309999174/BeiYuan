@@ -287,21 +287,14 @@ public class LuntanFragment extends Fragment implements BaseSliderView.OnSliderC
             @Override
             public void onRefresh() {
                 Log.d(TAG, "onLoadMore: start");
-                marqueeTv.setVisibility(View.GONE);
-                mDemoSlider.setVisibility(View.GONE);
+
                 recyclerView.setPullLoadMoreCompleted();
-//                Log.d(TAG, "onRefresh: start");
-//                marqueeTv.setVisibility(View.VISIBLE);
-//                mDemoSlider.setVisibility(View.VISIBLE);
-//                recyclerView.setPullLoadMoreCompleted();
+
             }
 
             @Override
             public void onLoadMore() {
 
-//                Log.d(TAG, "onLoadMore: start");
-//                marqueeTv.setVisibility(View.GONE);
-//                mDemoSlider.setVisibility(View.GONE);
                   recyclerView.setPullLoadMoreCompleted();
             }
 

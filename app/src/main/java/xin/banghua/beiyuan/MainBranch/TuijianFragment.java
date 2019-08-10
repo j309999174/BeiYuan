@@ -133,6 +133,7 @@ public class TuijianFragment extends Fragment implements BaseSliderView.OnSlider
 
             mDemoSlider.addSlider(textSliderView);
         }
+        mDemoSlider.setMinimumHeight(100);
         mDemoSlider.setPresetTransformer(SliderLayout.Transformer.Accordion);
         mDemoSlider.setPresetIndicator(SliderLayout.PresetIndicators.Center_Bottom);
         mDemoSlider.setCustomAnimation(new DescriptionAnimation());
@@ -194,7 +195,8 @@ public class TuijianFragment extends Fragment implements BaseSliderView.OnSlider
         final PullLoadMoreRecyclerView recyclerView = view.findViewById(R.id.tuijian_RecyclerView);
         UserInfoAdapter adapter = new UserInfoAdapter(view.getContext(),mUserID,mUserPortrait,mUserNickName,mUserAge,mUserGender,mUserProperty,mUserLocation,mUserRegion,mUserVIP);
         recyclerView.setAdapter(adapter);
-        recyclerView.setLinearLayout();;
+        recyclerView.setLinearLayout();
+        recyclerView.setMinimumHeight(500);
         recyclerView.setOnPullLoadMoreListener(new PullLoadMoreRecyclerView.PullLoadMoreListener() {
             @Override
             public void onRefresh() {

@@ -115,27 +115,33 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.daimajia.slider.library.SliderLayout
-                android:id="@+id/luntan_slider"
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_span="5"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:layout_span="5">
 
-        </TableRow>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+                    <com.daimajia.slider.library.SliderLayout
+                        android:id="@+id/luntan_slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-            <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
-                android:id="@+id/luntan_RecyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_span="5" />
+                    <com.wuxiaolong.pullloadmorerecyclerview.PullLoadMoreRecyclerView
+                        android:id="@+id/luntan_RecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="1000dp" />
+
+                </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
 
         </TableRow>
 

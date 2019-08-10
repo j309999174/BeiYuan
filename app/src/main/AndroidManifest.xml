@@ -32,7 +32,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".Main5Branch.BuyvipActivity"></activity>
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:exported="true"
+            android:taskAffinity="xin.banghua.beiyuan"
+            android:launchMode="singleTask"></activity>
+        <activity android:name=".Main5Branch.BuyvipActivity" />
         <activity android:name=".Signin.FindPasswordActivity" />
         <activity android:name=".Main5Branch.CommonSettingActivity" />
         <activity android:name=".Main5Branch.PrivateSettingActivity" />
