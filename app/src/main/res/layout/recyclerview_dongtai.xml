@@ -42,10 +42,10 @@
 
             <TextView
                 android:id="@+id/dongtaiWord"
-                android:layout_width="wrap_content"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:text="18"
+                android:text="99999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999"
                 android:textColor="@color/colorAccent"
                 android:textSize="18sp" />
         </TableRow>

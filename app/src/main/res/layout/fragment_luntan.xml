@@ -100,19 +100,6 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <xin.banghua.beiyuan.MarqueeTextView
-                android:id="@+id/marquee"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_span="5">
-
-            </xin.banghua.beiyuan.MarqueeTextView>
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <android.support.v4.widget.NestedScrollView
@@ -125,6 +112,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
+
+                    <xin.banghua.beiyuan.MarqueeTextView
+                        android:id="@+id/marquee"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_span="5">
+
+                    </xin.banghua.beiyuan.MarqueeTextView>
 
                     <com.daimajia.slider.library.SliderLayout
                         android:id="@+id/luntan_slider"

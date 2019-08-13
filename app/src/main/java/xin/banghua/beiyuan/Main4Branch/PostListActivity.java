@@ -40,10 +40,38 @@ public class PostListActivity extends AppCompatActivity {
 
     PostAdapter adapter;
 
+
+    String id;
+    String plateid;
+    String platename;
+    String authid;
+    String authnickname;
+    String authportrait;
+    String posttip;
+    String posttitle;
+    String posttext;
+    String[] postpicture;
+    String like;
+    String favorite;
+    String time;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_post_list);
+        id = getIntent().getStringExtra("postid");
+        plateid = getIntent().getStringExtra("plateid");
+        platename = getIntent().getStringExtra("platename");
+        authid = getIntent().getStringExtra("authid");
+        authnickname = getIntent().getStringExtra("authnickname");
+        authportrait = getIntent().getStringExtra("authportrait");
+        posttip = getIntent().getStringExtra("posttip");
+        posttitle = getIntent().getStringExtra("posttitle");
+        posttext = getIntent().getStringExtra("posttext");
+        postpicture = getIntent().getStringArrayExtra("postpicture");
+        like = getIntent().getStringExtra("like");
+        favorite = getIntent().getStringExtra("favorite");
+        time = getIntent().getStringExtra("time");
 
         ImageView back_btn = findViewById(R.id.iv_back_left);
         back_btn.setOnClickListener(new View.OnClickListener() {
@@ -57,42 +85,38 @@ public class PostListActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(PostListActivity.this,FabugentieActivity.class);
-                intent.putExtra("postid",getIntent().getStringExtra("postid"));
+                intent.putExtra("postid",id);
                 startActivity(intent);
             }
         });
 
-        getDataPosthead("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=postdetail&m=socialchat");
-
+        //getDataPosthead("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=postdetail&m=socialchat");
+        initPostHead();
     }
 
-    public void initPostHead(JSONArray jsonArray) throws JSONException {
+    public void initPostHead(){
         //初始化数据
-        if (jsonArray.length()>0){
-            for (int i=0;i<jsonArray.length();i++){
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String[] postPicture = jsonObject.getString("postpicture").split(",");
                 String postPicture1 = "";
                 String postPicture2 = "";
+
                 String postPicture3 = "";
-                switch (postPicture.length){
+                switch (postpicture.length){
                     case 1:
-                        postPicture1 = postPicture[0];
+                        postPicture1 = postpicture[0];
                         break;
                     case 2:
-                        postPicture1 = postPicture[0];
-                        postPicture2 = postPicture[1];
+                        postPicture1 = postpicture[0];
+                        postPicture2 = postpicture[1];
                         break;
                     case 3:
-                        postPicture1 = postPicture[0];
-                        postPicture2 = postPicture[1];
-                        postPicture3 = postPicture[2];
+                        postPicture1 = postpicture[0];
+                        postPicture2 = postpicture[1];
+                        postPicture3 = postpicture[2];
                         break;
                 }
-                PostHead posts = new PostHead(jsonObject.getString("posttitle"),jsonObject.getString("authid"),jsonObject.getString("authnickname"),jsonObject.getString("authportrait"),jsonObject.getString("posttext"),postPicture1,postPicture2,postPicture3,jsonObject.getString("time"));
+                PostHead posts = new PostHead(posttitle,authid,authnickname,authportrait,posttext,postPicture1,postPicture2,postPicture3,time);
                 postHeads.add(posts);
-            }
-        }
+
         getDataFollowlist("https://applet.banghua.xin/app/index.php?i=99999&c=entry&a=webapp&do=postdetail&m=socialchat");
 
     }
@@ -153,14 +177,14 @@ public class PostListActivity extends AppCompatActivity {
             //1是帖子，2是跟帖
             switch (msg.what){
                 case 1:
-                    try {
-                        Log.d(TAG, "handleMessage: 帖子接收的值"+msg.obj.toString());
-                        JSONArray jsonArray = new ParseJSONArray(msg.obj.toString()).getParseJSON();
-                        initPostHead(jsonArray);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    break;
+//                    try {
+//                        Log.d(TAG, "handleMessage: 帖子接收的值"+msg.obj.toString());
+//                        JSONArray jsonArray = new ParseJSONArray(msg.obj.toString()).getParseJSON();
+//                        initPostHead(jsonArray);
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                    break;
                 case 2:
                     try {
                         Log.d(TAG, "handleMessage: 跟帖接收的值"+msg.obj.toString());
@@ -174,34 +198,34 @@ public class PostListActivity extends AppCompatActivity {
         }
     };
     //TODO okhttp获取帖子信息  1.帖子，2.跟帖
-    public void getDataPosthead(final String url){
-        new Thread(new Runnable() {
-            @Override
-            public void run(){
-                OkHttpClient client = new OkHttpClient();
-                RequestBody formBody = new FormBody.Builder()
-                        .add("type", "getDataPosthead")
-                        .add("postid",getIntent().getStringExtra("postid"))
-                        .build();
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(formBody)
-                        .build();
-
-                try (Response response = client.newCall(request).execute()) {
-                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
-
-                    Message message=handler.obtainMessage();
-                    message.obj=response.body().string();
-                    message.what=1;
-                    Log.d(TAG, "run: 帖子发送的值"+message.obj.toString());
-                    handler.sendMessageDelayed(message,10);
-                }catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
+//    public void getDataPosthead(final String url){
+//        new Thread(new Runnable() {
+//            @Override
+//            public void run(){
+//                OkHttpClient client = new OkHttpClient();
+//                RequestBody formBody = new FormBody.Builder()
+//                        .add("type", "getDataPosthead")
+//                        .add("postid",id)
+//                        .build();
+//                Request request = new Request.Builder()
+//                        .url(url)
+//                        .post(formBody)
+//                        .build();
+//
+//                try (Response response = client.newCall(request).execute()) {
+//                    if (!response.isSuccessful()) throw new IOException("Unexpected code " + response);
+//
+//                    Message message=handler.obtainMessage();
+//                    message.obj=response.body().string();
+//                    message.what=1;
+//                    Log.d(TAG, "run: 帖子发送的值"+message.obj.toString());
+//                    handler.sendMessageDelayed(message,10);
+//                }catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
+//    }
     public void getDataFollowlist(final String url){
         new Thread(new Runnable() {
             @Override
@@ -209,7 +233,7 @@ public class PostListActivity extends AppCompatActivity {
                 OkHttpClient client = new OkHttpClient();
                 RequestBody formBody = new FormBody.Builder()
                         .add("type", "getDataFollowlist")
-                        .add("postid",getIntent().getStringExtra("postid"))
+                        .add("postid",id)
                         .build();
                 Request request = new Request.Builder()
                         .url(url)

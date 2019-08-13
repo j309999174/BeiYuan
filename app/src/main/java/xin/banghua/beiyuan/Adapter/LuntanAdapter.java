@@ -90,29 +90,41 @@ public class LuntanAdapter extends RecyclerView.Adapter<LuntanAdapter.ViewHolder
         viewHolder.posttitle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PostListActivity.class);
-                intent.putExtra("postid",currentItem.getId());
-                v.getContext().startActivity(intent);
+                intentPostlist(v,currentItem);
             }
         });
         viewHolder.posttext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PostListActivity.class);
-                intent.putExtra("postid",currentItem.getId());
-                v.getContext().startActivity(intent);
+                intentPostlist(v,currentItem);
             }
         });
         viewHolder.postpicture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), PostListActivity.class);
-                intent.putExtra("postid",currentItem.getId());
-                v.getContext().startActivity(intent);
+                intentPostlist(v,currentItem);
             }
         });
 
     }
+    public void intentPostlist(View v,LuntanList currentItem){
+        Intent intent = new Intent(v.getContext(), PostListActivity.class);
+        intent.putExtra("postid",currentItem.getId());
+        intent.putExtra("plateid",currentItem.getPlateid());
+        intent.putExtra("platename",currentItem.getPlatename());
+        intent.putExtra("authid",currentItem.getAuthid());
+        intent.putExtra("authnickname",currentItem.getAuthnickname());
+        intent.putExtra("authportrait",currentItem.getAuthportrait());
+        intent.putExtra("posttip",currentItem.getPosttip());
+        intent.putExtra("posttitle",currentItem.getPosttitle());
+        intent.putExtra("posttext",currentItem.getPosttext());
+        intent.putExtra("postpicture",currentItem.getPostpicture());
+        intent.putExtra("like",currentItem.getLike());
+        intent.putExtra("favorite",currentItem.getFavorite());
+        intent.putExtra("time",currentItem.getTime());
+        v.getContext().startActivity(intent);
+    }
+
 
     @Override
     public int getItemCount() {
